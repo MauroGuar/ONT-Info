@@ -15,15 +15,13 @@ if i == 1:
     ssh_session.sendline("yes")
     ssh_session.expect("password:")
 ssh_session.sendline(password)
-i = ssh_session.expect([">","Reenter times have reached the upper limit.","password:"])
+i = ssh_session.expect([">","Reenter times have reached the upper limit.","password:",'$'])
 if i == 1:
-    print("Alguien mas esta usando la sesion ssh, espere unos segundos o contacte con su administrador")
-    ssh_session.close
-    exit
-if i == 2:
-    print("La contraseña que esta intentando utilizar es incorrecta, contacte con su administrador")
-    ssh_session.close
-    exit
+    error("Alguien mas esta usando la sesion ssh, espere unos segundos o contacte con su administrador")
+elif i == 2:
+    error("La contraseña que esta intentando utilizar es incorrecta, contacte con su administrador")
+elif i == 3:
+    error("parece que se esta conectando a un dispositivo no soportado, contacte con su administrador")
 ssh_session.sendline(ssh_command)
 ssh_session.expect("#")
 ssh_session.sendline("display ont info by-sn 48575443655C13A0")
@@ -41,3 +39,8 @@ print(output)
 # Close the SSH session
 ssh_session.sendline("exit")
 ssh_session.close()
+
+def error(string):
+    print(string)
+    ssh_session.close
+    exit
