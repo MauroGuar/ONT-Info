@@ -1,27 +1,31 @@
 import pexpect
-
-# OLT SSH connection details
-olt_ip = "172.16.17.48"
-username = "mauro"
-password = "admin123"
+from config import OLT_IP, OLT_PASSWORD, OLT_USERNAME
 
 # SSH command to be executed
 ssh_command = "enable"
 
 # Establish SSH connection
-ssh_session = pexpect.spawn(f"ssh {username}@{olt_ip}")
-i = ssh_session.expect(['password:',r'\(yes\/no\/\[fingerprint\]\)'])
+ssh_session = pexpect.spawn(f"ssh {OLT_USERNAME}@{OLT_IP}")
+i = ssh_session.expect(["password:", r"\(yes\/no\/\[fingerprint\]\)"])
 if i == 1:
     ssh_session.sendline("yes")
     ssh_session.expect("password:")
-ssh_session.sendline(password)
-i = ssh_session.expect([">","Reenter times have reached the upper limit.","password:",'$'])
+ssh_session.sendline(OLT_PASSWORD)
+i = ssh_session.expect(
+    [">", "Reenter times have reached the upper limit.", "password:", "$"]
+)
 if i == 1:
-    error("Alguien mas esta usando la sesion ssh, espere unos segundos o contacte con su administrador")
+    error(
+        "Alguien mas esta usando la sesion ssh, espere unos segundos o contacte con su administrador"
+    )
 elif i == 2:
-    error("La contraseña que esta intentando utilizar es incorrecta, contacte con su administrador")
+    error(
+        "La contraseña que esta intentando utilizar es incorrecta, contacte con su administrador"
+    )
 elif i == 3:
-    error("parece que se esta conectando a un dispositivo no soportado, contacte con su administrador")
+    error(
+        "parece que se esta conectando a un dispositivo no soportado, contacte con su administrador"
+    )
 ssh_session.sendline(ssh_command)
 ssh_session.expect("#")
 ssh_session.sendline("display ont info by-sn 48575443655C13A0")
@@ -39,6 +43,7 @@ print(output)
 # Close the SSH session
 ssh_session.sendline("exit")
 ssh_session.close()
+
 
 def error(string):
     print(string)
