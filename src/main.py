@@ -1,19 +1,24 @@
-import paramiko
 from ssh_connection import ssh_get_connection
 
-hostname = "172.16.17.48"
-username = "mauro"
-port = 22
-password = "admin123"
 
-ssh = ssh_get_connection(hostname, port, username, password)
+def main():
+    hostname = "172.16.17.48"
+    username = "mauro"
+    port = 22
+    password = "admin123"
 
-stdin, stdout, stderr = ssh.exec_command("pwd")
+    ssh = ssh_get_connection(hostname, port, username, password)
 
-output_lines = stdout.readlines()
+    stdin, stdout, stderr = ssh.exec_command("pwd")
 
-print("Resultado del comando:")
-for line in output_lines:
-    print(line.strip())
+    output_lines = stdout.readlines()
 
-ssh.close()
+    print("Resultado del comando:")
+    for line in output_lines:
+        print(line.strip())
+
+    ssh.close()
+
+
+if __name__ == "__main__":
+    main()
