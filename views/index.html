@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ITC - Reclamos</title>
-    <!-- LINK CSS -->
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </head>
-  <body>
-    <header class="header">
-      <div class="logo">
-        <h2 class="title">ITC <span class="subtitle">Reclamos</span></h2>
-      </div>
-    </header>
 
-    <main>
-      <form action="/ssh" method="post">
-        <div class="box">
-          <label for="ip">IP:</label>
-          <input type="text" id="ip" name="ip" required /><br />
-        </div>
-        <div class="box sn">
-          <label>SN:</label>
-          <input type="text" />
-        </div>
-        <div>
-          <button class="button" type="submit">Buscar</button>
-        </div>
-      </form>
-      <div class="data_container">
-        <h4>Datos:</h4>
-        <div class="data">
-          <div id="result">
-            {% if result %}
-            <pre>{{ result }}</pre>
-            {% endif %}
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>ITC - Reclamos</title>
+  <!-- LINK CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <h2 class="title">ITC <span class="subtitle">Reclamos</span></h2>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- FORM -->
+    <form action="/ssh" method="post">
+      <div class="box">
+        <label for="ip">IP:</label>
+        <input type="text" id="ip" name="ip" required /><br />
+      </div>
+      <div class="box sn">
+        <label>SN:</label>
+        <input type="text" />
+      </div>
+      <div>
+        <button class="button" type="submit">Buscar</button>
+      </div>
+    </form>
+
+    <div class="data_container">
+      <h4>Datos:</h4>
+      <div class="data">
+        <!-- HERE THE SSH COMMAND IS PRINTED -->
+        <div id="result">
+          {% if result %}
+          <pre>{{ result }}</pre>
+          {% endif %}
         </div>
       </div>
-    </main>
-    <footer></footer>
-  </body>
+    </div>
+  </main>
+</body>
+
 </html>
 
 <style>
@@ -136,7 +142,7 @@
     border: 0.1rem solid #000000;
   }
 
-  .data_container{
+  .data_container {
     margin-top: 5rem;
     display: flex;
     flex-direction: column;
@@ -144,11 +150,15 @@
     gap: 10px;
   }
 
-  .data{
-    border: 0.1rem solid #000000;
-    width: 25%;
-    box-sizing: content-box;
-    padding: 0.5rem 0 3rem 0;
+  .data {
+    margin-bottom: 2rem;
   }
 
+  pre {
+    border: 0.1rem solid #000000;
+    white-space: pre-warp;
+    overflow: auto;
+    max-width: 400px;
+    padding: 10px;
+  } 
 </style>
