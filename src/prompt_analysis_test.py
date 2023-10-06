@@ -74,31 +74,19 @@ MA5800-X7
 """
 
 # Patrón regex para encontrar names y sus valuees
-regex_name_value = r'([^\s][^:\n]*\S)\s+:\s*([^\n]*\S)[^\n]*'
+regex_name_value = r'([^\s][^:\n]*\S)\s+:\s*([^\n]+)'
 
-# Inicializar un diccionario para almacenar los name_value_pair_0
-name_value_pair_0 = {}
+# Inicializar un diccionario para almacenar los name_value_pair
+name_value_pair = {}
 
-# Buscar todas las matches_0 usando el patrón regex
-matches_0 = re.findall(regex_name_value, test_str1)
+# Buscar todas las matches usando el patrón regex
+matches = re.findall(regex_name_value, test_str1)
+print(f'{matches}')
 
-# Almacenar las matches_0 en el diccionario
-for name, value in matches_0:
-    name_value_pair_0[name.strip()] = value.strip()
+# Almacenar las matches en el diccionario
+for name, value in matches:
+    name_value_pair[name.strip()] = value.strip()
 
-# Mostrar los name_value_pair_0 almacenados
-# for name, value in name_value_pair_0.items():
-#     print(f'{name}: {value}')
-
-f_s = name_value_pair_0['F/S/P'][:3] 
-f_s_formatted = name_value_pair_0['F/S/P'][:1] + "\\" + name_value_pair_0['F/S/P'][1:3]
-p = name_value_pair_0 ['F/S/P'][4]
-ont_id = name_value_pair_0 ['ONT-ID']
-run_state = name_value_pair_0['Run state']
-
-
-
-# Imprime las name_value_pair_0
-print("f_s es ",f_s," f_s_formatted es ",f_s_formatted," y p es ",p)
-
-
+# Mostrar los name_value_pair almacenados
+for name, value in name_value_pair.items():
+    print(f'{name}: {value}')
