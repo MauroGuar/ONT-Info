@@ -26,39 +26,48 @@ def expect_hyphens(session):
     expect_prompt(session, "----")
 
 
-def get_info_table(session):
-    table = ""
+def get_info_table(session, ont_sn):
+    ont_info_table = ""
     send_line(session, "enable")
     expect_asterisk(session)
-    send_line(session, "display ont info by-sn 48575443655C13A0")
+    send_line(session, f"display ont info by-sn {ont_sn}")
     expect_bracket(session)
     send_enter(session)
     expect_hyphens(session)
     send_enter(session, 3)
     send_line(session, "q")
     expect_asterisk(session)
-    table = session.before.decode("utf-8")
-    return table
+    ont_info_table = session.before.decode("utf-8")
+    return ont_info_table
 
 
-def get_optical_info_table(session):
-    table = ""
+def get_optical_info_table(session, ont_info_dic):
+    ont_optical_info_table = ""
+
+    ont_front_slot = ont_info_dic["F/S/P"][:3]
+    ont_port = ont_info_dic["F/S/P"][4]
+    ont_id = ont_info_dic["ONT-ID"]
+
     send_line(session, "config")
     expect_asterisk(session)
-    send_line(session, "interface gpon 0/3")
+    send_line(session, f"interface gpon {ont_front_slot}")
     expect_asterisk(session)
-    send_line(session, "display ont optical-info 0 1")
+    send_line(session, f"display ont optical-info {ont_port} {ont_id}")
     expect_bracket(session)
     send_enter(session)
     expect_hyphens(session)
     send_enter(session, 5)
     send_line(session, "q")
     expect_asterisk(session)
-    table = session.before.decode("utf-8")
-    return table
+    ont_optical_info_table = session.before.decode("utf-8")
+    return ont_optical_info_table
 
 
-def get_ont_tables(ssh_session):
-    ont_info_table = get_info_table(ssh_session)
-    ont_optical_info_table = get_optical_info_table(ssh_session)
-    return (ont_info_table, ont_optical_info_table)
+def get_ont_info_table(ssh_session, ont_sn):
+    ont_info_table = get_info_table(ssh_session, ont_sn)
+    return ont_info_table
+
+
+def get_ont_optical_info_table(ssh_session, ont_info_dic):
+    ont_optical_info_table = get_optical_info_table(ssh_session, ont_info_dic)
+    return ont_optical_info_table

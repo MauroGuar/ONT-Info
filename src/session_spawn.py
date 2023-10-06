@@ -1,5 +1,5 @@
 import pexpect
-from config import OLT_IP, OLT_PASSWORD, OLT_USERNAME
+from config import OLT_PASSWORD, OLT_USERNAME
 
 
 def ssh_startup_analysis(ssh_session, expect_index):
@@ -23,8 +23,8 @@ def ssh_password_analysis(ssh_session, expect_index):
         ssh_session.close()
 
 
-def get_ssh_session(session_timeout=0):
-    ssh_session = pexpect.spawn(f"ssh {OLT_USERNAME}@{OLT_IP}")
+def get_ssh_session(olt_ip, session_timeout=0):
+    ssh_session = pexpect.spawn(f"ssh {OLT_USERNAME}@{olt_ip}")
 
     if session_timeout > 0:
         ssh_session.timeout = session_timeout
