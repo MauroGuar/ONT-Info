@@ -6,22 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>ITC - Reclamos</title>
-  <!-- LINK CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- LINK FONT AWESOME -->
+  <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
   <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <h2 class="title">ITC <span class="subtitle">Reclamos</span></h2>
+  <header class="top">
+    <div class="header">
+      <div class="logo">
+        <img src="https://itcsa.net.ar/assets/images/itc-brand.svg" alt="">
+        <h4>ONT INFO</h4>
+      </div>
+      <div class="help">
+        <a href="#" class="help_menu" id="help"><i class="fa-solid fa-question"></i> Ayuda</a>
+      </div>
     </div>
   </header>
 
   <!-- MAIN -->
   <main>
+
+    <!-- HELP SECTION -->
+    <section class="help_section" id="helpSection">
+      <div class="help_title">
+        <h4>Seccion de Ayuda</h4>
+      </div>
+      <div class="info_container">
+        <p> Simplemente tenes que ingresar la IP y el SN del OLT al que quieras ver su información, una vez que haya
+          ingresado correctamente esos dos valores, la información se motrará debajo de la palabra información, en un
+          recuadro ajustado automaticamente a esta.</p>
+      </div>
+      <div class="close_container">
+        <button class="close_help" id="closeHelp">Cerrar</button>
+      </div>
+    </section>
+    </section>
+    </section>
 
     <!-- FORM -->
     <form action="/ssh" method="post">
@@ -39,7 +62,7 @@
     </form>
 
     <div class="data_container">
-      <h4>Datos:</h4>
+      <h4>Información:</h4>
       <div class="data">
         <!-- HERE THE SSH COMMAND IS PRINTED -->
         <div id="result">
@@ -78,29 +101,47 @@
 
   /* HEADER */
 
+  .top {
+    border-top: 5px solid var(--orange);
+  }
+
   .header {
-    right: 0;
-    top: 0;
-    left: 0;
-    background-color: var(--black);
-    box-shadow: var(--box-shadow);
-    text-align: center;
-    padding-bottom: 3rem;
-    position: relative;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
   }
 
   .logo {
-    color: var(--white);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
   }
 
-  .logo .subtitle {
-    font-size: 1.3rem;
+  .logo img {
+    width: 40px;
+    margin-right: 10px;
+  }
+
+  .logo h4 {
+    color: var(--white);
+    margin-left: 10px;
+  }
+
+  .help {
+    margin-right: 20px;
+  }
+
+  .help a {
+    color: var(--white);
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .help a i {
     color: var(--orange);
   }
+
 
   /* MAIN */
 
@@ -108,6 +149,55 @@
     text-align: center;
     margin-top: 5rem;
   }
+
+  /* HELP SECTION */
+
+  .help_section {
+    position: fixed;
+    right: -50%;
+    top: 11%;
+    width: 300px;
+    height: 265px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--orange);
+    background-color: var(--black);
+    align-items: center;
+    color: var(--white);
+    gap: 15px;
+  }
+
+  .help_title {
+    margin-top: 1rem;
+    color: var(--orange);
+  }
+
+  .info_container {
+    margin: 0 20px 0 20px;
+  }
+
+  .info_container p {
+    font-size: 0.9rem;
+  }
+
+  .close_help {
+    padding: 0.5rem;
+    background-color: var(--orange);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .close_help:hover {
+    background-color: var(--white);
+    color: var(--black);
+    border: 0.1rem solid var(--orange);
+  }
+
+  .help_section.active {
+    right: 0.1%;
+  }
+
+  /* FORM */
 
   .box {
     display: flex;
@@ -160,5 +250,22 @@
     overflow: auto;
     max-width: 400px;
     padding: 10px;
-  } 
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var help = document.getElementById("help");
+    var helpSection = document.getElementById("helpSection");
+    var closeHelp = document.getElementById("closeHelp");
+
+    help.addEventListener("click", function (event) {
+      event.preventDefault();
+      helpSection.classList.add("active");
+    });
+
+    closeHelp.addEventListener("click", function () {
+      helpSection.classList.remove("active");
+    });
+  });
+</script>
