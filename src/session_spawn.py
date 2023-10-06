@@ -46,3 +46,7 @@ def get_ssh_session(session_timeout=0):
     )
 
     return ssh_session
+
+
+def close_session(ssh_session):
+    ssh_session.close()
