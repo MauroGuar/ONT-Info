@@ -18,9 +18,9 @@ def main():
 
     ont_optical_info_dic = get_dictionary_from_table(ont_optical_info_table)
 
-    # print(ont_info_table)
-    # print(ont_optical_info_table)
-    # print(f"{ont_info_dic}\n\n{ont_optical_info_dic}")
+    print(ont_info_table)
+    print(ont_optical_info_table)
+    print(f"{ont_info_dic}\n\n{ont_optical_info_dic}")
 
     close_session(ssh_session)
 
