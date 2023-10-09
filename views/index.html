@@ -47,22 +47,24 @@
     </section>
 
     <!-- FORM -->
-    <form action="/ssh" method="post">
+    <form onsubmit="event.preventDefault(); enviarFormulario();" class="from_container">
       <div class="box">
         <label for="ip">IP:</label>
         <input type="text" id="ip" name="ip" required /><br />
       </div>
       <div class="box sn">
         <label>SN:</label>
-        <input type="text" />
+        <input type="text" id="sn" name="sn" required /><br />
       </div>
-      <div>
+      <div class="box">
         <button class="button" type="submit">Buscar</button>
+        <button class="button" type="button" id="historialBtn">Historial</button>
       </div>
     </form>
 
-    <div class="data_container">
-      <h4>Información:</h4>
+
+    <section class="=data_container">
+      <h4 class="title_info">Información:</h4>
       <div class="data">
         <!-- HERE THE SSH COMMAND IS PRINTED -->
         <div id="result">
@@ -71,7 +73,12 @@
           {% endif %}
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="history">
+
+    </section>
+
   </main>
 </body>
 
@@ -97,6 +104,19 @@
     outline: none;
     border: none;
     transition: all 0.5s;
+  }
+
+  button {
+    padding: 0.5rem;
+    background-color: var(--orange);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  button:hover {
+    background-color: var(--white);
+    color: var(--orange);
+    border: 0.1rem solid #000000;
   }
 
   /* HEADER */
@@ -212,7 +232,7 @@
   }
 
   .sn {
-    margin-right: 2.4rem;
+    margin-right: 1.4rem;
   }
 
   .box input {
@@ -244,11 +264,16 @@
     margin-bottom: 2rem;
   }
 
+  #result {
+    text-align: center;
+    justify-content: center;
+  }
+
   pre {
     border: 0.1rem solid #000000;
     white-space: pre-warp;
     overflow: auto;
-    max-width: 400px;
+    max-width: 850px;
     padding: 10px;
   }
 </style>
@@ -266,6 +291,16 @@
 
     closeHelp.addEventListener("click", function () {
       helpSection.classList.remove("active");
+    });
+  });
+
+  //Go to historial.html
+  document.addEventListener("DOMContentLoaded", function () {
+    var historialBtn = document.getElementById("historialBtn");
+    historialBtn.addEventListener("click", function () {
+      var ip = document.getElementById("id").value;
+      var sn = document.getElementById("sn").value;
+      window.location.href = `/historial?ip=${ip}&sn=${sn}`;
     });
   });
 </script>
