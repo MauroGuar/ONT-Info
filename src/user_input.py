@@ -13,18 +13,17 @@ def ipv4_validation(ip):
             if len(parte) > 1 and parte[0] == '0':
                 error_return("La ip introducida contiene 0s a la izquierda o de relleno, formato no permitido.","The ip contains zero padding/leading zeroes (like the zero in 013), incorrect format")
     except ValueError:
-        return False
+        error_return("La ip introducida contiene caracteres que no son enteros, verifique por errores de syntaxis ", "parseint failed")
 
     return True
 def sn_validation(serial,length,base):
     try:
         # verifies if the serial has the exact introduced length
         if len(serial) != length:
-            error_return(f"El sn introducido no satisface la longitud requerida: {length} caracteres",f"The introduced serial number does not satisfy the length condition of {length}")
+            error_return(f"El sn introducido no satisface la longitud requerida: {length} caracteres",f"The introduced serial number does not satisfy the exact length condition of {length}")
 
         # tries to convert the number to the introduced base
         int(serial, base)
-        return serial
     except ValueError:
         error_return(f"Alguno de los caracteres introducidos como parte del sn no satisfacen la base necesaria: base {base}", f"the serial number does not satisfy the base per character(Value error when parsing), in this case, base: {base}")
 def get_input():
@@ -33,11 +32,8 @@ def get_input():
     sn_length= 16
     sn_base= 16
     if len(sys.argv) > 2:
-        if ipv4_validation(ip_introduced) == False:
-            error_return("La ip introducida es invalida, verifique por errores de syntaxis o contacte a su adminstrador","either the IP does not consist of 4 parts, or one of the 4 parts is outside the range [0-255], or a there is a 0 to the left of a number (which is unvalid)")
-        elif sn_validation(sn_introduced,sn_length,sn_base) == False:
-            error_return("El sn introducido es invalido, verifique por errores de syntaxis o contacte a su administrador",f"either the sn")
-        else:
-            return ip_introduced, sn_introduced
+        ipv4_validation(ip_introduced)
+        sn_validation(sn_introduced,sn_length,sn_base)
+        return ip_introduced, sn_introduced
     else:
         error_return("Falta de argumentos necesarios, introduzca como primer argumento la ip y como segundo argumento la sn","lack of required arguments, correct format: python program.py [IP] [SN]")
