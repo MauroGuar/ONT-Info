@@ -44,9 +44,9 @@ def get_info_table(session, ont_sn):
 def get_optical_info_table(session, ont_info_dic):
     ont_optical_info_table = ""
 
-    ont_front_slot = ont_info_dic["F/S/P"][:3]
-    ont_port = ont_info_dic["F/S/P"][4]
-    ont_id = ont_info_dic["ONT-ID"]
+    ont_front_slot = ont_info_dic["f/s/p"][:3]
+    ont_port = ont_info_dic["f/s/p"][4]
+    ont_id = ont_info_dic["ont-id"]
 
     send_line(session, "config")
     expect_asterisk(session)

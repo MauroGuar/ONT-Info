@@ -80,6 +80,9 @@ button:hover {
 main {
   text-align: center;
   margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* HELP SECTION */
@@ -130,32 +133,45 @@ main {
 }
 
 /* FORM */
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  gap: 1.7rem;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
 
 .box {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin: 1rem;
+  flex-direction: row;
+  gap: 0.4rem;
 }
 
 .box label {
+  width: 35%;
   font-weight: 800;
-}
-
-.sn {
-  margin-right: 1.4rem;
+  padding: 0;
 }
 
 .box input {
   border: 0.1rem solid #000000;
-  width: 15%;
   height: 2em;
   padding: 0.8em;
 }
 
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .button {
-  padding: 0.5rem;
   background-color: var(--orange);
   color: var(--white);
   font-weight: 600;
@@ -165,29 +181,4 @@ main {
   background-color: var(--white);
   color: var(--orange);
   border: 0.1rem solid #000000;
-}
-
-.data_container {
-  margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.data {
-  margin-bottom: 2rem;
-}
-
-#result {
-  text-align: center;
-  justify-content: center;
-}
-
-pre {
-  border: 0.1rem solid #000000;
-  white-space: pre-warp;
-  overflow: auto;
-  max-width: 850px;
-  padding: 10px;
 }

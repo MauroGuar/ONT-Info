@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from app.data_processing.ont_info import get_ont_info
 
 app = Flask(__name__)
 
@@ -13,7 +14,9 @@ def buscar():
     if request.method == "POST":
         olt_ip = request.form["olt_ip"]
         ont_sn = request.form["ont_sn"]
-        resultado = f"OLT IP: {olt_ip}, ONT SN: {ont_sn}"
+
+        resultado = get_ont_info(olt_ip, ont_sn)
+
         return render_template(
-            "resultado.html", css_file="main_styles.css", resultado=resultado
+            "resultado.html", css_file="results_styles.css", resultado=resultado
         )

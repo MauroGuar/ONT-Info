@@ -2,6 +2,27 @@
 {% block title %}Resultado{% endblock%}
 
 {% block body %}
-<h1>Resultado:</h1>
-<p>{{ resultado }}</p>
+<main>
+    <section class="table-container">
+        <h2>Información de la ONT</h2>
+        <table class="table">
+            <tr>
+                <td>Run state</td>
+                <td>online</td>
+            </tr>
+            <tr>
+                <td>Temperature</td>
+                <td>55(C)</td>
+            </tr>
+            <tr>
+                <td>Rx optical power(dBm)</td>
+                <td>-15,23</td>
+            </tr>
+            <tr>
+                <td>OLT Rx ONT optical power(dBm)</td>
+                <td>-15,66</td>
+            </tr>
+        </table>
+    </section>
+</main>
 {% endblock %}

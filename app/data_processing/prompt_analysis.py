@@ -9,6 +9,6 @@ def get_dictionary_from_table(table_prompt):
     matches = findall(REGEX_PATTERN, table_prompt)
 
     for name, value in matches:
-        dictionary[name.strip()] = value.strip()
+        dictionary[name.strip().lower()] = value.strip().lower()
 
     return dictionary

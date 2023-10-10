@@ -1,0 +1,40 @@
+/* Establece el estilo básico para el cuerpo de la página */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Usa flexbox para el elemento principal */
+main {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos dentro de main se envuelvan en pantalla pequeña */
+}
+
+/* Estilo para cada contenedor de tabla */
+.table-container {
+  flex: 1; /* Distribuye el espacio disponible entre los contenedores de tabla */
+  margin: 10px; /* Espacio entre los contenedores de tabla */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Estilo para las tablas */
+.table {
+  width: 100%; /* Ocupa todo el ancho disponible en el contenedor */
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Hacer que las tablas se apilen en pantallas pequeñas */
+@media screen and (max-width: 600px) {
+  .table-container {
+    flex-basis: 100%; /* En pantallas pequeñas, ocupa todo el ancho disponible */
+  }
+}
