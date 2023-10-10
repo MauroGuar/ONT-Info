@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+{% block title %}Consulta ONT{% endblock%}
+
+{% block body %}
+<header class="top">
+    <div class="header">
+        <div class="logo">
+            <img src="https://itcsa.net.ar/assets/images/itc-brand.svg" alt="">
+            <h4>CONSULTA ONT</h4>
+        </div>
+        <div class="help">
+            <a href="#" class="help_menu" id="help"><i class="fa-solid fa-question"></i> Ayuda</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <form action="/buscar" method="POST" class="from_container">
+        <div class="box">
+            <label for="olt_ip">OLT IP:</label>
+            <input type="text" id="olt_ip" name="olt_ip" required /><br />
+        </div>
+        <div class="box sn">
+            <label for="ont_sn">ONT SN:</label>
+            <input type="text" id="ont_sn" name="ont_sn" required /><br />
+        </div>
+        <div class="box">
+            <button class="button" type="submit">Buscar</button>
+            <button class="button" type="button" id="historialBtn">Historial</button>
+        </div>
+    </form>
+</main>
+{% endblock %}

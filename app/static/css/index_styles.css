@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+:root {
+  --orange: #fe7f2d;
+  --black: #000000;
+  --grey: #393939;
+  --white: #ffffff;
+  --box-shadow: 0 2rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+* {
+  font-family: "Roboto";
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  transition: all 0.5s;
+}
+
+button {
+  padding: 0.5rem;
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: var(--white);
+  color: var(--orange);
+  border: 0.1rem solid #000000;
+}
+
+/* HEADER */
+
+.top {
+  border-top: 5px solid var(--orange);
+}
+
+.header {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.logo h4 {
+  color: var(--white);
+  margin-left: 10px;
+}
+
+.help {
+  margin-right: 20px;
+}
+
+.help a {
+  color: var(--white);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.help a i {
+  color: var(--orange);
+}
+
+/* MAIN */
+
+main {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+/* HELP SECTION */
+
+.help_section {
+  position: fixed;
+  right: -50%;
+  top: 11%;
+  width: 300px;
+  height: 265px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--orange);
+  background-color: var(--black);
+  align-items: center;
+  color: var(--white);
+  gap: 15px;
+}
+
+.help_title {
+  margin-top: 1rem;
+  color: var(--orange);
+}
+
+.info_container {
+  margin: 0 20px 0 20px;
+}
+
+.info_container p {
+  font-size: 0.9rem;
+}
+
+.close_help {
+  padding: 0.5rem;
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.close_help:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border: 0.1rem solid var(--orange);
+}
+
+.help_section.active {
+  right: 0.1%;
+}
+
+/* FORM */
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.box label {
+  font-weight: 800;
+}
+
+.sn {
+  margin-right: 1.4rem;
+}
+
+.box input {
+  border: 0.1rem solid #000000;
+  width: 15%;
+  height: 2em;
+  padding: 0.8em;
+}
+
+.button {
+  padding: 0.5rem;
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.button:hover {
+  background-color: var(--white);
+  color: var(--orange);
+  border: 0.1rem solid #000000;
+}
+
+.data_container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.data {
+  margin-bottom: 2rem;
+}
+
+#result {
+  text-align: center;
+  justify-content: center;
+}
+
+pre {
+  border: 0.1rem solid #000000;
+  white-space: pre-warp;
+  overflow: auto;
+  max-width: 850px;
+  padding: 10px;
+}
