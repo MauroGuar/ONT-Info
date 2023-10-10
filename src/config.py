@@ -1,7 +1,12 @@
-from dotenv import dotenv_values
+from os import environ
+from dotenv import find_dotenv, load_dotenv
 
-env_config = dotenv_values()
+dotenv_file = find_dotenv()
+load_dotenv(dotenv_file)
 
-OLT_IP = env_config["OLT_IP"]
-OLT_USERNAME = env_config["OLT_USERNAME"]
-OLT_PASSWORD = env_config["OLT_PASSWORD"]
+
+OLT_USERNAME = environ["OLT_USERNAME"]
+OLT_PASSWORD = environ["OLT_PASSWORD"]
+
+OLT_IP_ENV = environ["OLT_IP"]
+ONT_SN_ENV = environ["ONT_SN"]
