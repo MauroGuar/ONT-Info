@@ -1,7 +1,7 @@
-from .session_spawn import get_ssh_session, close_session
-from .ont_tables import get_ont_info_table, get_optical_info_table
-from .prompt_analysis import get_dictionary_from_table
-from .user_input import ip_sn_validator
+from app.data_processing.ssh_session_handler.session_spawn import get_ssh_session, close_session
+from app.data_processing.ssh_session_handler.ont_tables import get_ont_info_table, get_optical_info_table
+from app.data_processing.dictionary_handler.prompt_analysis import get_dictionary_from_table
+from app.data_processing.error_handler.user_input import ip_sn_validator
 
 
 def sample_prompt():
@@ -63,10 +63,10 @@ def sample_prompt():
 
 def get_ont_info(olt_ip_introduced, ont_sn_introduced, debug_mode=False):
     if not debug_mode:
-        sn_dictionary = str.maketrans('QOIZ','0012')
+        sn_dictionary = str.maketrans('QOIZ', '0012')
 
-        olt_ip, ont_sn = ip_sn_validator(olt_ip_introduced,ont_sn_introduced,16,16,sn_dictionary)
-        
+        olt_ip, ont_sn = ip_sn_validator(olt_ip_introduced, ont_sn_introduced, 16, 16, sn_dictionary)
+
         ssh_session = get_ssh_session(olt_ip, session_timeout=4)
 
         ont_info_table = get_ont_info_table(ssh_session, ont_sn)
