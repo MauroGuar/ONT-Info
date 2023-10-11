@@ -15,8 +15,8 @@ def buscar():
         olt_ip = request.form["olt_ip"]
         ont_sn = request.form["ont_sn"]
 
-        resultado = get_ont_info(olt_ip, ont_sn)
+        resultado = get_ont_info(olt_ip, ont_sn, True)
 
         return render_template(
-            "resultado.html", css_file="results_styles.css", resultado=resultado
+            "results.html", css_file="results_styles.css", resultado=resultado
         )

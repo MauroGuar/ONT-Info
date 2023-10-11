@@ -1,184 +1,132 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 :root {
-  --orange: #fe7f2d;
-  --black: #000000;
-  --grey: #393939;
-  --white: #ffffff;
-  --box-shadow: 0 2rem 1.5rem rgba(0, 0, 0, 0.1);
-}
-
-* {
-  font-family: "Roboto";
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-  transition: all 0.5s;
+    --orange: #fe7f2d;
+    --black: #000000;
+    --grey: #393939;
+    --white: #ffffff;
+    --box-shadow: 0 2rem 1.5rem rgba(0, 0, 0, 0.1);
 }
 
 button {
-  padding: 0.5rem;
-  background-color: var(--orange);
-  color: var(--white);
-  font-weight: 600;
+    padding: 0.5rem;
+    background-color: var(--orange);
+    color: var(--white);
+    font-weight: 600;
 }
 
 button:hover {
-  background-color: var(--white);
-  color: var(--orange);
-  border: 0.1rem solid #000000;
-}
-
-/* HEADER */
-
-.top {
-  border-top: 5px solid var(--orange);
-}
-
-.header {
-  background-color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  width: 40px;
-  margin-right: 10px;
-}
-
-.logo h4 {
-  color: var(--white);
-  margin-left: 10px;
-}
-
-.help {
-  margin-right: 20px;
-}
-
-.help a {
-  color: var(--white);
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.help a i {
-  color: var(--orange);
+    background-color: var(--white);
+    color: var(--orange);
+    border: 0.1rem solid #000000;
 }
 
 /* MAIN */
 
 main {
-  text-align: center;
-  margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    font-family: Roboto;
+    text-align: center;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* HELP SECTION */
 
 .help_section {
-  position: fixed;
-  right: -50%;
-  top: 11%;
-  width: 300px;
-  height: 265px;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid var(--orange);
-  background-color: var(--black);
-  align-items: center;
-  color: var(--white);
-  gap: 15px;
+    position: fixed;
+    right: -50%;
+    top: 11%;
+    width: 300px;
+    height: 265px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--orange);
+    background-color: var(--black);
+    align-items: center;
+    color: var(--white);
+    gap: 15px;
 }
 
 .help_title {
-  margin-top: 1rem;
-  color: var(--orange);
+    margin-top: 1rem;
+    color: var(--orange);
 }
 
 .info_container {
-  margin: 0 20px 0 20px;
+    margin: 0 20px 0 20px;
 }
 
 .info_container p {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
 }
 
 .close_help {
-  padding: 0.5rem;
-  background-color: var(--orange);
-  color: var(--white);
-  font-weight: 600;
+    padding: 0.5rem;
+    background-color: var(--orange);
+    color: var(--white);
+    font-weight: 600;
 }
 
 .close_help:hover {
-  background-color: var(--white);
-  color: var(--black);
-  border: 0.1rem solid var(--orange);
+    background-color: var(--white);
+    color: var(--black);
+    border: 0.1rem solid var(--orange);
 }
 
 .help_section.active {
-  right: 0.1%;
+    right: 0.1%;
 }
 
 /* FORM */
 form {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  gap: 1.7rem;
+    font-family: Roboto;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    gap: 1.7rem;
 }
 
 .inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
 }
 
 .box {
-  display: flex;
-  flex-direction: row;
-  gap: 0.4rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
 }
 
 .box label {
-  width: 35%;
-  font-weight: 800;
-  padding: 0;
+    width: 35%;
+    font-weight: 800;
+    padding: 0;
 }
 
 .box input {
-  border: 0.1rem solid #000000;
-  height: 2em;
-  padding: 0.8em;
+    border: 0.1rem solid #000000;
+    height: 2em;
+    padding: 0.8em;
 }
 
 .btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .button {
-  background-color: var(--orange);
-  color: var(--white);
-  font-weight: 600;
+    background-color: var(--orange);
+    color: var(--white);
+    font-weight: 600;
 }
 
 .button:hover {
-  background-color: var(--white);
-  color: var(--orange);
-  border: 0.1rem solid #000000;
+    background-color: var(--white);
+    color: var(--orange);
+    border: 0.1rem solid #000000;
 }
