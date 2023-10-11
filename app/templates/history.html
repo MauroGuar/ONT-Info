@@ -1,0 +1,14 @@
+{% extends './base.html' %}
+
+{% block title %}Historial{% endblock %}
+
+{% block body %}
+<main>
+    <h2>Historial de consultas</h2>
+    <ul>
+        {% for item in historial %}
+            <li>{{ item | tojson }}</li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}

@@ -1,33 +1,34 @@
 import pexpect
 from .config import OLT_USERNAME, OLT_PASSWORD
-
+from .errors import error_return
 
 def ssh_startup_analysis(ssh_session, expect_index):
     if expect_index == 1:
         ssh_session.sendline("yes")
         ssh_session.expect("password:")
     elif expect_index == 2:
-        print("ERROR")
+        error_return("se acabo el tiempo de espera, revise que la ip introducida sea correcta o contacte con su administrador", "pexpect TIMEOUT")
     elif expect_index == 3:
-        error_return(
-            "No se ha encontrado una ruta al dispositivo, revise la ip introducida o contacte con su administrador",
-            "ssh: connect to host $IP port $PORT: No route to host",
-        )
+        error_return("No se ha encontrado una ruta al dispositivo, revise la ip introducida o contacte con su administrador","ssh: connect to host $IP port $PORT: No route to host")
     elif expect_index == 4:
-        print("ERROR")
+        error_return("la conexion esta siendo terminada por el servidor, puede que su ip haya sido bloqueada, espere 10 minutos o contacte con su administrador", "kex_exchange_identification: read: Connection reset by peer")
     elif expect_index == 5:
-        print("ERROR")
+        error_return("No se ha encontrado la red, revise su conexion a internet o contacte con su administrador", "Network is unreachable")
+    elif expect_index == 6:
+        error_return("Conexion rechazada, verifique la ip introducida o contacte con su administrador","ssh: connect to host $host port $PORT: Connection refused")
 
 
 def ssh_password_analysis(ssh_session, expect_index):
     if expect_index == 1:
-        print("ERROR")
+        error_return("Alguien mas esta ocupando la sesion ssh, espere unos segundos o contacte con su administrador","Reenter times have reached the upper limit.")
     elif expect_index == 2:
-        print("ERROR")
+        error_return("Contraseña incorrecta, revise que la contraseña este bien escrita o contacte con su administrador","Password was requested again after being entered = wrong password OR wrong user")
     elif expect_index == 3:
-        print("ERROR")
+        error_return("Conexion a dispositivo no soportado, contacte con su administrador","prompt identifier is $(typical unix) and not >(OLT)")
     elif expect_index == 4:
-        print("ERROR")
+        error_return("su IP ha sido bloqueada por multiples intentos de acceso fallidos, contacte con su administrador","Received disconnect from $IP port $PORT: The IP address has been locked")
+        
+        
 
 
 def get_ssh_session(olt_ip, session_timeout=0):
@@ -39,14 +40,7 @@ def get_ssh_session(olt_ip, session_timeout=0):
     ssh_startup_analysis(
         ssh_session,
         ssh_session.expect(
-            [
-                "password:",
-                r"\(yes\/no\/\[fingerprint\]\)",
-                pexpect.TIMEOUT,
-                "No route to host",
-                "Connection reset by peer",
-                "Network is unreachable",
-            ]
+            ["password:", r"\(yes\/no\/\[fingerprint\]\)", pexpect.TIMEOUT,"No route to host","Connection reset by peer","Network is unreachable","Connection refused"]
         ),
     )
 
@@ -55,13 +49,7 @@ def get_ssh_session(olt_ip, session_timeout=0):
     ssh_password_analysis(
         ssh_session,
         ssh_session.expect(
-            [
-                ">",
-                "Reenter times have reached the upper limit.",
-                "password:",
-                r"\$",
-                "The IP address has been locked",
-            ]
+            [">", "Reenter times have reached the upper limit.", "password:", r"\$", "The IP address has been locked"]
         ),
     )
 

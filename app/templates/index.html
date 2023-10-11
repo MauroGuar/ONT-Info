@@ -3,7 +3,7 @@
 
 {% block body %}
 <main>
-    <form action="/buscar" method="POST" class="from_container">
+    <form action="/history" method="POST" class="from_container">
         <div class="inputs">
             <div class="box">
                 <label for="olt_ip">OLT IP:</label>
@@ -16,8 +16,13 @@
         </div>
         <div class="btns">
             <button class="button" type="submit">Buscar</button>
-            <button class="button" type="button" id="historialBtn">Historial</button>
+            <button class="button" href="/historial?olt_ip={{ request.form['olt_ip'] }}&ont_sn={{ request.form['ont_sn'] }}">Historial</button>
         </div>
     </form>
-</main>
+    <div id="result">
+        {% if e %}
+        <pre>{{ e }}</pre>
+        {% endif %}
+    </div>
+</main> 
 {% endblock %}

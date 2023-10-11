@@ -1,28 +1,68 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
-/* Establece el estilo básico para el cuerpo de la página */
 body {
     margin: 0;
     padding: 0;
 }
 
-/* Usa flexbox para el elemento principal */
 main {
     font-family: Roboto;
     display: flex;
-    flex-wrap: wrap; /* Permite que los elementos dentro de main se envuelvan en pantalla pequeña */
+    flex-wrap: wrap;
 }
 
-/* Estilo para cada contenedor de tabla */
 .table-container {
-    flex: 1; /* Distribuye el espacio disponible entre los contenedores de tabla */
-    margin: 10px; /* Espacio entre los contenedores de tabla */
+    flex: 1;
+    margin: 10px;
     padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
-/* Estilo para las tablas */
+.tb-title {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.3em;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+
+    font-size: 0.94em;
+}
+
+.ip-sn {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.ip-sn h3 {
+    margin: 0;
+}
+
+.ip-sn h3 span {
+    font-weight: 100;
+}
+
+.tb-date {
+    margin: 0;
+    font-weight: 100;
+}
+
+.ln {
+    width: 100%;
+    display: block;
+    margin: auto;
+    margin-bottom: 1.2rem;
+}
+
+.ln hr {
+    color: #bbbbbb;
+    background-color: #bbbbbb;
+    height: 1px;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -35,7 +75,26 @@ main {
     text-align: left;
 }
 
-/* Hacer que las tablas se apilen en pantallas pequeñas */
+.td-key {
+    font-weight: 550;
+}
+
+.table tr:nth-child(odd) .td-key {
+    background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) .td-key {
+    background-color: #e3e3e3;
+}
+
+.table tr:nth-child(odd) .td-value {
+    background-color: #e9f1ff;
+}
+
+.table tr:nth-child(even) .td-value {
+    background-color: #c4d4ffff;
+}
+
 @media screen and (max-width: 600px) {
     .table-container {
         flex-basis: 100%;

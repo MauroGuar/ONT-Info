@@ -4,23 +4,32 @@
 {% block body %}
 <main>
     <section class="table-container">
-        <h2>Información de la ONT</h2>
+        <div class="tb-title">
+            <div class="ip-sn">
+                <h3>OLT IP: <span>172.17.254.45</span></h3>
+                <h3>ONT SN: <span>48575443655C13A0</span></h3>
+            </div>
+            <h4 class="tb-date">11/10/2023 11:09</h4>
+        </div>
+        <div class="ln">
+            <hr>
+        </div>
         <table class="table">
             <tr>
-                <td>Run state</td>
-                <td>online</td>
+                <td class="td-key">Run state</td>
+                <td class="td-value">online</td>
             </tr>
             <tr>
-                <td>Temperature</td>
-                <td>55(C)</td>
+                <td class="td-key">Temperature</td>
+                <td class="td-value">55(C)</td>
             </tr>
             <tr>
-                <td>Rx optical power(dBm)</td>
-                <td>-15,23</td>
+                <td class="td-key">Rx optical power(dBm)</td>
+                <td class="td-value">-15,23</td>
             </tr>
             <tr>
-                <td>OLT Rx ONT optical power(dBm)</td>
-                <td>-15,66</td>
+                <td class="td-key">OLT Rx ONT optical power(dBm)</td>
+                <td class="td-value">-15,66</td>
             </tr>
         </table>
     </section>
