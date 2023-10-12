@@ -1,6 +1,6 @@
-from app.data_processing.ssh_session_handler.session_spawn import get_ssh_session, close_session
-from app.data_processing.ssh_session_handler.ont_tables import get_ont_info_table, get_optical_info_table
-from app.data_processing.dictionary_handler.prompt_analysis import get_dictionary_from_table
+from app.data_processing.ssh_prompt_handler.session_spawn import get_ssh_session, close_session
+from app.data_processing.ssh_prompt_handler.ont_prompt import get_ont_info_prompt, get_optical_info_prompt
+from app.data_processing.dictionary_handler.prompt_analysis import get_dictionary_from_prompt
 from app.data_processing.error_handler.user_input import ip_sn_validator
 
 
@@ -57,11 +57,12 @@ def sample_prompt():
   Tx bias current alarm threshold(mA)    : [0.000,90.000]
   Temperature(C)                         : 48
   Temperature warning threshold(C)       : [-,-]
+  OLT Rx ONT optical power(dBm)          : -15.66
     """
     return info_sample, opt_info_sample
 
 
-def get_ont_info(olt_ip_introduced, ont_sn_introduced, debug_mode=False):
+def get_ont_info_dictionaries(olt_ip_introduced, ont_sn_introduced, debug_mode=False):
     if not debug_mode:
         sn_dictionary = str.maketrans('QOIZ', '0012')
 
@@ -69,18 +70,26 @@ def get_ont_info(olt_ip_introduced, ont_sn_introduced, debug_mode=False):
 
         ssh_session = get_ssh_session(olt_ip, session_timeout=4)
 
-        ont_info_table = get_ont_info_table(ssh_session, ont_sn)
+        ont_info_prompt = get_ont_info_prompt(ssh_session, ont_sn)
 
-        ont_info_dic = get_dictionary_from_table(ont_info_table)
+        ont_info_dic = get_dictionary_from_prompt(ont_info_prompt)
 
-        ont_optical_info_table = get_optical_info_table(ssh_session, ont_info_dic)
+        ont_optical_info_prompt = get_optical_info_prompt(ssh_session, ont_info_dic)
 
-        ont_optical_info_dic = get_dictionary_from_table(ont_optical_info_table)
+        ont_optical_info_dic = get_dictionary_from_prompt(ont_optical_info_prompt)
 
         close_session(ssh_session)
     else:
         info_sample_prompt, opt_info_sample_prompt = sample_prompt()
-        ont_info_dic = get_dictionary_from_table(info_sample_prompt)
-        ont_optical_info_dic = get_dictionary_from_table(opt_info_sample_prompt)
+        ont_info_dic = get_dictionary_from_prompt(info_sample_prompt)
+        ont_optical_info_dic = get_dictionary_from_prompt(opt_info_sample_prompt)
 
     return ont_info_dic, ont_optical_info_dic
+
+
+def get_ont_info_to_show(olt_ip_introduced, ont_sn_introduced, items_to_show=None, debug_mode=False):
+    ont_info_dic, ont_optical_info_dic = get_ont_info_dictionaries(olt_ip_introduced, ont_sn_introduced, debug_mode)
+    dictionary_to_show = {**ont_info_dic, **ont_optical_info_dic}
+    if items_to_show is not None:
+        dictionary_to_show = dict(filter(lambda item: item[0] in items_to_show, dictionary_to_show.items()))
+    return dictionary_to_show

@@ -26,8 +26,8 @@ def expect_hyphens(session):
     expect_prompt(session, "----")
 
 
-def get_info_table(session, ont_sn):
-    ont_info_table = ""
+def get_info_prompt(session, ont_sn):
+    ont_info_prompt = ""
     send_line(session, "enable")
     expect_asterisk(session)
     send_line(session, f"display ont info by-sn {ont_sn}")
@@ -37,12 +37,12 @@ def get_info_table(session, ont_sn):
     send_enter(session, 3)
     send_line(session, "q")
     expect_asterisk(session)
-    ont_info_table = session.before.decode("utf-8")
-    return ont_info_table
+    ont_info_prompt = session.before.decode("utf-8")
+    return ont_info_prompt
 
 
-def get_optical_info_table(session, ont_info_dic):
-    ont_optical_info_table = ""
+def get_optical_info_prompt(session, ont_info_dic):
+    ont_optical_info_prompt = ""
 
     ont_front_slot = ont_info_dic["f/s/p"][:3]
     ont_port = ont_info_dic["f/s/p"][4]
@@ -59,15 +59,15 @@ def get_optical_info_table(session, ont_info_dic):
     send_enter(session, 5)
     send_line(session, "q")
     expect_asterisk(session)
-    ont_optical_info_table = session.before.decode("utf-8")
-    return ont_optical_info_table
+    ont_optical_info_prompt = session.before.decode("utf-8")
+    return ont_optical_info_prompt
 
 
-def get_ont_info_table(ssh_session, ont_sn):
-    ont_info_table = get_info_table(ssh_session, ont_sn)
-    return ont_info_table
+def get_ont_info_prompt(ssh_session, ont_sn):
+    ont_info_prompt = get_info_prompt(ssh_session, ont_sn)
+    return ont_info_prompt
 
 
-def get_ont_optical_info_table(ssh_session, ont_info_dic):
-    ont_optical_info_table = get_optical_info_table(ssh_session, ont_info_dic)
-    return ont_optical_info_table
+def get_ont_optical_info_prompt(ssh_session, ont_info_dic):
+    ont_optical_info_prompt = get_optical_info_prompt(ssh_session, ont_info_dic)
+    return ont_optical_info_prompt

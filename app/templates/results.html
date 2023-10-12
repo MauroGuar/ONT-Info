@@ -6,31 +6,21 @@
     <section class="table-container">
         <div class="tb-title">
             <div class="ip-sn">
-                <h3>OLT IP: <span>172.17.254.45</span></h3>
-                <h3>ONT SN: <span>48575443655C13A0</span></h3>
+                <h3>OLT IP: <span>{{ olt_ip }}</span></h3>
+                <h3>ONT SN: <span>{{ ont_sn }}</span></h3>
             </div>
-            <h4 class="tb-date">11/10/2023 11:09</h4>
+            <h4 class="tb-date">{{ date }} {{ time }}</h4>
         </div>
         <div class="ln">
             <hr>
         </div>
         <table class="table">
+            {% for key in dict_show %}
             <tr>
-                <td class="td-key">Run state</td>
-                <td class="td-value">online</td>
+                <td class="td-key">{{ key[0]|upper }}{{ key[1:] }}</td>
+                <td class="td-value">{{ dict_show[key] }}</td>
             </tr>
-            <tr>
-                <td class="td-key">Temperature</td>
-                <td class="td-value">55(C)</td>
-            </tr>
-            <tr>
-                <td class="td-key">Rx optical power(dBm)</td>
-                <td class="td-value">-15,23</td>
-            </tr>
-            <tr>
-                <td class="td-key">OLT Rx ONT optical power(dBm)</td>
-                <td class="td-value">-15,66</td>
-            </tr>
+            {% endfor %}
         </table>
     </section>
 </main>
