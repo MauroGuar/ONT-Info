@@ -130,3 +130,12 @@ form {
     color: var(--orange);
     border: 0.1rem solid #000000;
 }
+
+#wait-msg {
+    display: none;
+    align-content: center;
+    justify-content: center;
+    font-family: Roboto;
+    font-size: 0.9rem;
+    color: #7c7c7c;
+}

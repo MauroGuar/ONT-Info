@@ -23,7 +23,7 @@ def buscar():
         items_to_show = ["run state", "temperature(c)", "description", "last down cause", "last up time",
                          "last down time", "ont online duration", "rx optical power(dbm)",
                          "olt rx ont optical power(dbm)"]
-        dictionary_to_show = get_ont_info_to_show(olt_ip, ont_sn, items_to_show, True)
+        dictionary_to_show = get_ont_info_to_show(olt_ip, ont_sn, items_to_show, False)
 
         return render_template(
             "results.html", css_file="results_styles.css", olt_ip=olt_ip, ont_sn=ont_sn, date=date, time=time,

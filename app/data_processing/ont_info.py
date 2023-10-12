@@ -71,10 +71,13 @@ def get_ont_info_dictionaries(olt_ip_introduced, ont_sn_introduced, debug_mode=F
         ssh_session = get_ssh_session(olt_ip, session_timeout=4)
 
         ont_info_prompt = get_ont_info_prompt(ssh_session, ont_sn)
+        print(ont_info_prompt)
+        print("\n \n =======CAMBIO DE TABLA======= \n \n")
 
         ont_info_dic = get_dictionary_from_prompt(ont_info_prompt)
 
         ont_optical_info_prompt = get_optical_info_prompt(ssh_session, ont_info_dic)
+        print(ont_optical_info_prompt)
 
         ont_optical_info_dic = get_dictionary_from_prompt(ont_optical_info_prompt)
 
@@ -90,6 +93,7 @@ def get_ont_info_dictionaries(olt_ip_introduced, ont_sn_introduced, debug_mode=F
 def get_ont_info_to_show(olt_ip_introduced, ont_sn_introduced, items_to_show=None, debug_mode=False):
     ont_info_dic, ont_optical_info_dic = get_ont_info_dictionaries(olt_ip_introduced, ont_sn_introduced, debug_mode)
     dictionary_to_show = {**ont_info_dic, **ont_optical_info_dic}
+    print(dictionary_to_show)
     if items_to_show is not None:
         dictionary_to_show = dict(filter(lambda item: item[0] in items_to_show, dictionary_to_show.items()))
     return dictionary_to_show
