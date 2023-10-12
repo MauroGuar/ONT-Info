@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    font-family: Roboto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.table-container {
+    flex: 1;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.tb-title {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.3em;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+
+    font-size: 0.94em;
+}
+
+.ip-sn {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.ip-sn h3 {
+    margin: 0;
+}
+
+.ip-sn h3 span {
+    font-weight: 100;
+}
+
+.tb-date {
+    margin: 0;
+    font-weight: 100;
+}
+
+.ln {
+    width: 100%;
+    display: block;
+    margin: auto;
+    margin-bottom: 1.2rem;
+}
+
+.ln hr {
+    color: #bbbbbb;
+    background-color: #bbbbbb;
+    height: 1px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.td-key {
+    font-weight: 550;
+}
+
+.table tr:nth-child(odd) .td-key {
+    background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) .td-key {
+    background-color: #e3e3e3;
+}
+
+.table tr:nth-child(odd) .td-value {
+    background-color: #e9f1ff;
+}
+
+.table tr:nth-child(even) .td-value {
+    background-color: #c4d4ffff;
+}
+
+@media screen and (max-width: 600px) {
+    .table-container {
+        flex-basis: 100%;
+    }
+}

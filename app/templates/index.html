@@ -1,0 +1,29 @@
+{% extends './base.html' %}
+{% block title %}Consulta ONT{% endblock%}
+
+{% block body %}
+<main>
+    <form action="/buscar" method="POST" id="ip-sn-form" class="from_container">
+        <div class="inputs">
+            <div class="box">
+                <label for="olt_ip">OLT IP:</label>
+                <input type="text" id="olt_ip" name="olt_ip" required/><br/>
+            </div>
+            <div class="box">
+                <label for="ont_sn">ONT SN:</label>
+                <input type="text" id="ont_sn" name="ont_sn" required/><br/>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="button" type="submit">Buscar</button>
+        </div>
+        <h5 id="wait-msg">Procesando. Por favor, espere...</h5>
+    </form>
+    <div id="result">
+        {% if e %}
+        <pre>{{ e }}</pre>
+        {% endif %}
+    </div>
+</main>
+<script src="{{ url_for('static', filename='js/index_app.js') }}"></script>
+{% endblock %}
