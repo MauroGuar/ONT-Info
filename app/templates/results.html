@@ -15,10 +15,10 @@
             <hr>
         </div>
         <table class="table">
-            {% for key in dict_show %}
+            {% for key in dictionary_to_show %}
             <tr>
                 <td class="td-key">{{ key[0]|upper }}{{ key[1:] }}</td>
-                <td class="td-value">{{ dict_show[key] }}</td>
+                <td class="td-value">{{ dictionary_to_show[key] }}</td>
             </tr>
             {% endfor %}
         </table>

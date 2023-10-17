@@ -1,5 +1,5 @@
 import pexpect
-from app.data_processing.config import OLT_USERNAME, OLT_PASSWORD
+from app.config import OLT_USERNAME, OLT_PASSWORD
 from app.data_processing.error_handler.errors import error_return
 
 
