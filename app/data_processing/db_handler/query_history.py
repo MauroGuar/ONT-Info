@@ -75,7 +75,7 @@ def maximum_date_time_range(hours_range=24):
     return datetime.now() - timedelta(hours=hours_range)
 
 
-def new_query(olt_ip, ont_sn, debug_mode):
+def new_qry(olt_ip, ont_sn, debug_mode):
     qry_col = MongoConnection().get_queries_collection()
     ont_info_dic, ont_optical_info_dic = get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode)
     json_to_save = {

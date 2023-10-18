@@ -9,7 +9,14 @@
                 <h3>OLT IP: <span>{{ olt_ip }}</span></h3>
                 <h3>ONT SN: <span>{{ ont_sn }}</span></h3>
             </div>
-            <h4 class="tb-date">{{ date }} {{ time }}</h4>
+            <div class="refresh-date">
+                <form action="/buscar" method="POST">
+                    <input type="hidden" name="olt_ip" value="{{ olt_ip }}">
+                    <input type="hidden" name="ont_sn" value="{{ ont_sn }}">
+                    <button type="submit" name="refresh-info" class="refresh-btn">Actualizar Datos</button>
+                </form>
+                <h4 class="tb-date">{{ date }} {{ time }}</h4>
+            </div>
         </div>
         <div class="ln">
             <hr>
