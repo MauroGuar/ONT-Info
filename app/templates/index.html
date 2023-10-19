@@ -7,11 +7,11 @@
         <div class="inputs">
             <div class="box">
                 <label for="olt_ip">OLT IP:</label>
-                <input type="text" id="olt_ip" name="olt_ip" required/><br/>
+                <input type="text" id="olt_ip" name="olt_ip" required /><br />
             </div>
             <div class="box">
                 <label for="ont_sn">ONT SN:</label>
-                <input type="text" id="ont_sn" name="ont_sn" required/><br/>
+                <input type="text" id="ont_sn" name="ont_sn" required /><br />
             </div>
         </div>
         <div class="btns">
@@ -25,5 +25,10 @@
         {% endif %}
     </div>
 </main>
+
+<div class="img_container">
+    <img src="data:image/png;base64,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"
+        alt="">
+</div>
 <script src="{{ url_for('static', filename='js/index_app.js') }}"></script>
 {% endblock %}

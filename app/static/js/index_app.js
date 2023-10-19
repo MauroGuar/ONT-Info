@@ -2,9 +2,10 @@ const waitMsg = document.getElementById('wait-msg');
 const form = document.getElementById('ip-sn-form');
 
 form.addEventListener('submit', function () {
-    waitMsg.style.display = 'flex';
+    waitMsg.style.display = "flex";
+    localStorage.setItem("submittedForm", "true")
 });
 
-form.addEventListener('load', function () {
-    waitMsg.style.display = 'none';
-});
+if (localStorage.getItem("submittedForm") === "true") {
+    waitMsg.style.display = "none"
+}

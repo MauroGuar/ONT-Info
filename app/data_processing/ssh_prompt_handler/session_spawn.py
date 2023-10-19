@@ -4,6 +4,16 @@ from app.data_processing.error_handler.errors import error_return
 
 
 def ssh_startup_analysis(ssh_session, expect_index):
+    """
+    Analyzes startup responses during SSH session initiation and handles various scenarios.
+
+    Args:
+        ssh_session (pexpect.spawn): SSH session object.
+        expect_index (int): Index of the expected pattern to match in the response.
+
+    Raises:
+        Exception: Custom error messages are raised based on different expect_index values.
+    """
     if expect_index == 1:
         ssh_session.sendline("yes")
         ssh_session.expect("password:")
@@ -35,14 +45,22 @@ def ssh_startup_analysis(ssh_session, expect_index):
 
 
 def ssh_password_analysis(ssh_session, expect_index):
+    """
+    Analyzes password-related responses during SSH session initiation and handles various scenarios.
+
+    Args:
+        ssh_session (pexpect.spawn): SSH session object.
+        expect_index (int): Index of the expected pattern to match in the response.
+
+    Raises:
+        Exception: Custom error messages are raised based on different expect_index values.
+    """
     if expect_index == 1:
         error_return(
             "Alguien mas esta ocupando la sesion ssh, espere unos segundos o contacte con su administrador",
             "Reenter times have reached the upper limit.",
         )
     elif expect_index == 2:
-        ont_info_prompt = ssh_session.before.decode("utf-8")
-        print(ont_info_prompt)
         error_return(
             "Contraseña incorrecta, revise que la contraseña este bien escrita o contacte con su administrador",
             "Password was requested again after being entered = wrong password OR wrong user",
@@ -60,6 +78,16 @@ def ssh_password_analysis(ssh_session, expect_index):
 
 
 def get_ssh_session(olt_ip, session_timeout=0):
+    """
+    Establishes an SSH session with the specified OLT device.
+
+    Args:
+        olt_ip (str): IP address of the OLT device.
+        session_timeout (int): Timeout value for the SSH session (default is 0).
+
+    Returns:
+        pexpect.spawn: SSH session object.
+    """
     ssh_session = pexpect.spawn(f"ssh {OLT_USERNAME}@{olt_ip}")
 
     if session_timeout > 0:
@@ -99,4 +127,10 @@ def get_ssh_session(olt_ip, session_timeout=0):
 
 
 def close_session(ssh_session):
+    """
+    Closes the SSH session.
+
+    Args:
+        ssh_session (pexpect.spawn): SSH session object to be closed.
+    """
     ssh_session.close()
