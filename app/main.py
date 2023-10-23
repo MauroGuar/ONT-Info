@@ -50,7 +50,7 @@ def buscar():
             ]
 
             # Set debug mode to False by default
-            debug_mode = False
+            debug_mode = True
 
             # Check if "refresh-info" is in the request form
             if "refresh-info" in request.form:
