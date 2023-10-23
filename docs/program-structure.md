@@ -32,7 +32,7 @@ The db_handler directory contains all the back-end logic used to comunicate with
 
 ##### /app/data_processing/db_handler/query_history.py
 
-The query_history.py file uses the functions and class provided by connection.py, this contains all the logic that are related to the buttons
+The query_history.py file uses the functions and class provided by connection.py, this contains all the logic that are related to the buttons to make a db proper query.
 
 #### /app/data_processing/error_handler/
 
