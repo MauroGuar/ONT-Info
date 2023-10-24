@@ -1,10 +1,17 @@
+# Import necessary modules and functions
 from flask_pymongo import DESCENDING
 from datetime import datetime, timedelta, timezone
 from app.database.connection import MongoConnection
 from app.data_processing.ssh_prompt_handler.dictionary_converter import get_ont_info_dictionaries
 
-
+# Define a function to create an example JSON object
 def example_json():
+    """
+    Create and return an example JSON object containing ONT information.
+
+    Returns:
+        dict: Example JSON object.
+    """
     json = {
         "olt_ip": "172.17.254.45",
         "ont_sn": "48575443655C13A0",
@@ -70,12 +77,32 @@ def example_json():
     }
     return json
 
-
+# Define a function to calculate the maximum date-time range
 def maximum_date_time_range(hours_range=24):
+    """
+    Calculate the maximum date-time range.
+
+    Args:
+        hours_range (int): Number of hours to subtract from the current date and time.
+
+    Returns:
+        datetime: Maximum date-time within the specified range.
+    """
     return datetime.now() - timedelta(hours=hours_range)
 
-
+# Define a function to create and save a new query document
 def new_qry(olt_ip, ont_sn, debug_mode):
+    """
+    Create a new query document and save it in a MongoDB collection.
+
+    Args:
+        olt_ip (str): OLT IP address.
+        ont_sn (str): ONT serial number.
+        debug_mode (bool): Debug mode flag.
+
+    Returns:
+        dict: JSON object representing the saved query document.
+    """
     qry_col = MongoConnection().get_queries_collection()
     ont_info_dic, ont_optical_info_dic = get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode)
     json_to_save = {
@@ -87,12 +114,23 @@ def new_qry(olt_ip, ont_sn, debug_mode):
     qry_col.insert_one(json_to_save)
     return json_to_save
 
-
+# Define a function to find the most recent query document within a date-time range
 def find_query_in_range(olt_ip, ont_sn):
+    """
+    Find the most recent query document for a specific OLT IP and ONT serial number within a date-time range.
+
+    Args:
+        olt_ip (str): OLT IP address.
+        ont_sn (str): ONT serial number.
+
+    Returns:
+        dict or None: The most recent query document if found, or None if no document matches the criteria.
+    """
     qry_col = MongoConnection().get_queries_collection()
     doc_matches = list(qry_col.find(
         {"olt_ip": olt_ip, "ont_sn": ont_sn, "date_time": {"$gte": maximum_date_time_range()}}).sort(
-        [("date_time", DESCENDING)]).limit(1))
+        [("date_time", DESCENDING)]).limit(1)
+    )
     if len(doc_matches) > 0:
         return doc_matches[0]
     return None
