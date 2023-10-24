@@ -1,6 +1,4 @@
 # Import necessary modules
-import datetime
-import pytz
 from flask import Flask, render_template, request
 from app.data_processing.ont_info import new_request, query_refresh
 from app.config import MONGO_URI
