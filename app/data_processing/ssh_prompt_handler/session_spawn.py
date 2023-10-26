@@ -89,7 +89,7 @@ def get_ssh_session(olt_ip, session_timeout=0):
     Returns:
         pexpect.spawn: SSH session object.
     """
-    ssh_session = pexpect.spawn(f"ssh {OLT_USERNAME}@{olt_ip}")
+    ssh_session = pexpect.spawn(f"ssh -o HostKeyAlgorithms=ssh-rsa {OLT_USERNAME}@{olt_ip}")
 
     if session_timeout > 0:
         ssh_session.timeout = session_timeout
