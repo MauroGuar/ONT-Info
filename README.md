@@ -15,7 +15,7 @@ The database is Mongo-DB, and the front end is a static page made with html and 
 
 ### Showcase:
 
-## Installation
+## Installation:
 
 ### system Installation (deprecated)
 
@@ -79,6 +79,52 @@ Press the letter `Y` as in Yes.
 `python ./run.py`
 
 ### Docker
+
+(Install Docker)["https://docs.docker.com/get-docker/"]
+
+(Install Docker compose)["https://docs.docker.com/compose/install/"]
+
+Clone the project wherever you like:
+
+`git clone https://github.com/MauroGuar/ONT-Info.git `
+
+Enter the project directory:
+
+`cd ./ONT-info`
+
+Inside the repo you just cloned , copy the file `.env.example` to `.env`
+
+`cp ./.env.example ./.env`
+
+Edit the `.env` file:
+
+`nano ./.env`
+
+you should see something like the following
+
+```
+# Default variables
+OLT_USERNAME=
+OLT_PASSWORD=
+
+
+# Test variables
+OLT_IP=
+ONT_SN=
+
+MONGO_URI= mongodb://mongo:27017/mydatabase
+```
+Now, fill in each field with the necessary data
+
+When you filled each field accordingly, press `CTRL + X` , the following text should be prompted on the down left corner saying the following:
+`Save modified buffer?`
+
+Press the letter `Y` as in Yes.
+
+##### Run the program
+
+`docker compose up --build -d`
+
 
 ### Requiremnets
 * Docker
