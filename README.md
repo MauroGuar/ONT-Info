@@ -125,19 +125,7 @@ Press the letter `Y` as in Yes.
 
 `sudo docker compose up --build -d`
 
-
-### Requiremnets
-* Docker
-* docker-compose
-* a way of editing and executing files
-
-Clone the project wherever you like:
-
-`git clone https://github.com/MauroGuar/ONT-Info.git`
-
-Enter the project directory:
-
-`cd ./ONT-info`
+Now you should be able of entering the program entering http://127.0.0.1/ on your web browser on the host pc or your local ip address, remember that this service uses the port 80.
 
 ## FAQ
 
