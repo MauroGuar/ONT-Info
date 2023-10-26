@@ -123,7 +123,7 @@ Press the letter `Y` as in Yes.
 
 ##### Run the program
 
-`docker compose up --build -d`
+`sudo docker compose up --build -d`
 
 
 ### Requiremnets
