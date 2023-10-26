@@ -80,9 +80,9 @@ Press the letter `Y` as in Yes.
 
 ### Docker
 
-(Install Docker)["https://docs.docker.com/get-docker/"]
+[Install Docker](https://docs.docker.com/get-docker/)
 
-(Install Docker compose)["https://docs.docker.com/compose/install/"]
+[Install Docker compose](https://docs.docker.com/compose/install/) (If needed, some docker installations already come with it)
 
 Clone the project wherever you like:
 
