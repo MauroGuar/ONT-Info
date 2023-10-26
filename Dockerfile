@@ -5,7 +5,11 @@ WORKDIR /app
 COPY requirements.txt .
 ADD . .
 
-RUN apk add --no-cache gcc musl-dev linux-headers
+RUN apk update
+RUN apk add --no-cache gcc musl-dev linux-headers openssh-client iproute2
+RUN touch /etc/ssh/ssh_config && echo "HostKeyAlgorithms ssh-rsa" >> /etc/ssh/ssh_config
 RUN pip install -r requirements.txt
+
+# RUN ip route add 172.17.254.45 via $(ip route | grep default | awk '{print $3}')
 
 EXPOSE 5000

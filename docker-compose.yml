@@ -15,15 +15,15 @@ services:
       TEMPLATES_AUTO_RELOAD: 'True'
       FLASK_ENV: development
     ports:
-      - '5000:5000'
-    links:
-      - database
+      - '80:5000'
     depends_on:
+      - database
+    links:
       - database
     volumes:
       - ./app:/app
     networks:
-      - default
+      - olt-connection
   database:
     image: mongo:7.0.2-jammy
     container_name: mongo
@@ -34,6 +34,9 @@ services:
     ports:
       - '27017:27017'
     networks:
-      - default
+      - olt-connection
+networks:
+  olt-connection:
+    driver: bridge
 volumes:
   persistent:
