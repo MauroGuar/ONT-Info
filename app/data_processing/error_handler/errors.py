@@ -1,7 +1,3 @@
-# Import necessary module
-import sys
-
-
 # Define a custom exception class
 class personalized_exception(Exception):
     """

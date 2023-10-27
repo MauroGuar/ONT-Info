@@ -78,7 +78,6 @@ The ont_info.py file defines the main back-end functions that handle the databas
 * filters which data to show and how to show it
 * handles the refresh of queries and the logic behind it(if its older than 24 hours create a new one, etc)
 
-
 ### /app/database/
 
 The database directory basically contains the file connection.py, but here should be all the required code to handle connections with the database.

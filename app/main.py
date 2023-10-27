@@ -48,16 +48,21 @@ def buscar():
             ]
 
             # Set debug mode to False by default
-            debug_mode = False
+            # Debug mode is used for development and means that an example prompt is used to perform all analysis and execution of the application
+            debug_mode = True
 
             # Check if "refresh-info" is in the request form
+            # This way it is checked if the button to update the data has been pressed.
             if "refresh-info" in request.form:
                 # Call the query_refresh function to obtain data
+                # This function creates a new query regardless of whether one already exists with the same olt ip and ont sn
                 date, time, dictionary_to_show = query_refresh(
                     olt_ip, ont_sn, items_to_show=items_to_show, debug_mode=debug_mode
                 )
             else:
                 # Call the new_request function to obtain data
+                # This function first searches for an existing query with the same olt ip and ont sn within a 24 hours range
+                # If not found, it creates a new query
                 date, time, dictionary_to_show = new_request(
                     olt_ip, ont_sn, items_to_show=items_to_show, debug_mode=debug_mode
                 )

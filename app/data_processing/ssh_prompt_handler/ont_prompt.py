@@ -1,6 +1,7 @@
+# Import necessary modules and functions
 import pexpect
 from app.data_processing.error_handler.errors import error_return
-# pexpect mimics human interaction, all the following code is trying to do so effectively in this case scenario
+
 
 def send_line(session, line_to_send):
     """
@@ -39,9 +40,7 @@ def send_enter(session, number_of_enters=1):
         send_line(session, "")
 
 
-
-
-def get_info_prompt(session, ont_sn):
+def get_ont_info_prompt(session, ont_sn):
     """
     Retrieves ONT information prompt for a given ONT serial number.
 
@@ -54,9 +53,9 @@ def get_info_prompt(session, ont_sn):
     """
     ont_info_prompt = ""
     send_line(session, "enable")
-    expect_prompt(session,"#")
+    expect_prompt(session, "#")
     send_line(session, f"display ont info by-sn {ont_sn}")
-    expect_prompt(session,"}:")
+    expect_prompt(session, "}:")
     send_enter(session)
     i = expect_prompt(session, ["----", "ONT does not exist"])
     if i == 1:
@@ -66,12 +65,12 @@ def get_info_prompt(session, ont_sn):
         )
     send_enter(session, 3)
     send_line(session, "q")
-    expect_prompt(session,"#")
+    expect_prompt(session, "#")
     ont_info_prompt = session.before.decode("utf-8")
     return ont_info_prompt
 
 
-def get_optical_info_prompt(session, ont_info_dic):
+def get_ont_optical_info_prompt(session, ont_info_dic):
     """
     Retrieves optical information prompt for a given ONT information dictionary.
 
@@ -87,60 +86,19 @@ def get_optical_info_prompt(session, ont_info_dic):
     ont_front_slot = ont_info_dic["f/s/p"][:3]
     ont_port = ont_info_dic["f/s/p"][4]
     ont_id = ont_info_dic["ont-id"]
+
     send_line(session, "config")
-    expect_prompt(session,"#")
+    expect_prompt(session, "#")
     send_line(session, f"interface gpon {ont_front_slot}")
-    expect_prompt(session,"#")
+    expect_prompt(session, "#")
     send_line(session, f"display ont optical-info {ont_port} {ont_id}")
-    expect_prompt(session,"#")
+    expect_prompt(session, "#")
     send_enter(session)
-    expect_prompt(session,"----")
+    expect_prompt(session, "----")
     send_enter(session, 5)
     send_line(session, "q")
-    expect_prompt(session,"#")
+    expect_prompt(session, "#")
     ont_optical_info_prompt = session.before.decode("utf-8")
     send_line(session, "quit")
-    expect_prompt(session,"#")
-    return ont_optical_info_prompt
-# def get_ont_config_prompt(session,ont_info_dic):
-#     # should be ran after get_optical_info_prompt()
-#     ont_config_prompt = ""
-#     ont_front_slot_port = ont_info_dic["f/s/p"]
-#     ont_id = ont_info_dic["ont-id"]
-#     send_line(session,f"display current-configuration ont {ont_front_slot_port} {ont_id}")
-#     expect_prompt(session,"#")
-#     send_enter(session)
-#     expect_prompt(session,"#")
-#     ont_config_prompt = session.before.decode("utf-8")
-#     return ont_config_prompt
-    
-
-
-def get_ont_info_prompt(ssh_session, ont_sn):
-    """
-    Retrieves ONT information prompt for a given SSH session and ONT serial number.
-
-    Args:
-        ssh_session (pexpect.spawn): SSH session object.
-        ont_sn (str): ONT serial number.
-
-    Returns:
-        str: ONT information prompt as a string.
-    """
-    ont_info_prompt = get_info_prompt(ssh_session, ont_sn)
-    return ont_info_prompt
-
-
-def get_ont_optical_info_prompt(ssh_session, ont_info_dic):
-    """
-    Retrieves optical information prompt for a given SSH session and ONT information dictionary.
-
-    Args:
-        ssh_session (pexpect.spawn): SSH session object.
-        ont_info_dic (dict): Dictionary containing ONT information.
-
-    Returns:
-        str: Optical information prompt as a string.
-    """
-    ont_optical_info_prompt = get_optical_info_prompt(ssh_session, ont_info_dic)
+    expect_prompt(session, "#")
     return ont_optical_info_prompt

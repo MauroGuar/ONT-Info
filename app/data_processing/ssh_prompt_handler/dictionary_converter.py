@@ -5,7 +5,7 @@ from app.data_processing.ssh_prompt_handler.session_spawn import (
 )
 from app.data_processing.ssh_prompt_handler.ont_prompt import (
     get_ont_info_prompt,
-    get_optical_info_prompt,
+    get_ont_optical_info_prompt,
 )
 from app.data_processing.ssh_prompt_handler.prompt_analysis import (
     get_dictionary_from_prompt,
@@ -90,7 +90,7 @@ def get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode=False):
 
     Returns:
         dict: Dictionary containing ONT information.
-        dict: Dictionary containing optical information.
+        dict: Dictionary containing ONT optical information.
     """
     if not debug_mode:
         # Create a character translation dictionary to replace certain characters in ONT SN.
@@ -109,10 +109,9 @@ def get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode=False):
         ont_info_dic = get_dictionary_from_prompt(ont_info_prompt)
 
         # Retrieve the optical information prompt based on the ONT information.
-        ont_optical_info_prompt = get_optical_info_prompt(ssh_session, ont_info_dic)
+        ont_optical_info_prompt = get_ont_optical_info_prompt(ssh_session, ont_info_dic)
 
         # Extract and parse the optical information from the prompt into a dictionary.
-
         ont_optical_info_dic = get_dictionary_from_prompt(ont_optical_info_prompt)
 
         # Close the SSH session.

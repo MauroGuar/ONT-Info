@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 from app.database.connection import MongoConnection
 from app.data_processing.ssh_prompt_handler.dictionary_converter import get_ont_info_dictionaries
 
+
 # Define a function to create an example JSON object
 def example_json():
     """
@@ -77,6 +78,7 @@ def example_json():
     }
     return json
 
+
 # Define a function to calculate the maximum date-time range
 def maximum_date_time_range(hours_range=24):
     """
@@ -90,10 +92,11 @@ def maximum_date_time_range(hours_range=24):
     """
     return datetime.now() - timedelta(hours=hours_range)
 
+
 # Define a function to create and save a new query document
-def new_qry(olt_ip, ont_sn, debug_mode):
+def new_query(olt_ip, ont_sn, debug_mode):
     """
-    Create a new query document and save it in a MongoDB collection.
+    Create a new query document and save it in the queries MongoDB collection.
 
     Args:
         olt_ip (str): OLT IP address.
@@ -114,6 +117,7 @@ def new_qry(olt_ip, ont_sn, debug_mode):
     qry_col.insert_one(json_to_save)
     return json_to_save
 
+
 # Define a function to find the most recent query document within a date-time range
 def find_query_in_range(olt_ip, ont_sn):
     """
@@ -129,8 +133,7 @@ def find_query_in_range(olt_ip, ont_sn):
     qry_col = MongoConnection().get_queries_collection()
     doc_matches = list(qry_col.find(
         {"olt_ip": olt_ip, "ont_sn": ont_sn, "date_time": {"$gte": maximum_date_time_range()}}).sort(
-        [("date_time", DESCENDING)]).limit(1)
-    )
+        [("date_time", DESCENDING)]).limit(1))
     if len(doc_matches) > 0:
         return doc_matches[0]
     return None

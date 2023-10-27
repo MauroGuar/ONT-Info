@@ -51,10 +51,10 @@ def ipv4_validation(ip):
 
 # Define a function for validating serial numbers
 def sn_validation(
-    introduced_serial,
-    introduced_length,
-    introduced_base,
-    introduced_dictionary={"Ñ": "N"},
+        introduced_serial,
+        introduced_length,
+        introduced_base,
+        introduced_dictionary={"Ñ": "N"},
 ):
     """
     Validate a serial number (SN) to ensure it satisfies length, base, and character conditions.
@@ -69,7 +69,8 @@ def sn_validation(
         str: The validated serial number if it passes validation.
         bool: True if validation is successful, else returns an error using the 'error_return' function.
     """
-    serial = introduced_serial.upper().translate(introduced_dictionary) # serial to uppercase and convert based on the dictionary
+    serial = introduced_serial.upper().translate(
+        introduced_dictionary)  # serial to uppercase and convert based on the dictionary
     try:
         # Verify if the serial has the exact introduced length.
         if len(serial) != introduced_length:
@@ -122,8 +123,8 @@ def get_input():
         sn_introduced = sys.argv[2]
         sn_length = 16
         sn_base = 16
-        # the following dictionary makes sense if we think about base 16 (letters like Z should not be there, hence we guess that it should be a 2)
-        # only uppercase is needed because inside the function everything is uppercased
+        # The following dictionary makes sense if we think about base 16 (letters like Z should not be there, hence we guess that it should be a 2)
+        # Only uppercase is needed because inside the function everything is uppercased
         sn_dictionary = str.maketrans("QOIZS", "00122")
         ip_return, sn_return = ip_sn_validator(ip_introduced, sn_introduced, sn_length, sn_base, sn_dictionary)
         return ip_return, sn_return
