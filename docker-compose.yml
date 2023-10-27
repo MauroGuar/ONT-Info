@@ -25,7 +25,7 @@ services:
     networks:
       - olt-connection
   database:
-    image: mongo:7.0.2-jammy
+    image: mongo:4-focal
     container_name: mongo
     hostname: mongo
     volumes:
