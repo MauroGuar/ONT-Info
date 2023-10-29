@@ -1,12 +1,17 @@
 # ONT-Info
+
 ## Description
+
 ONT-Info is a web app designed to retrieve info from an OLT about a ONT in question through SSH.
+
 ### supported olt's models:
+
 * Huawei SmartAX MA5800-X2
 
 ### Technologies used:
 
 ONT-Info is almost entirely made on python:
+
 * pymongo for the db-connection.
 * flask for the back-end.
 * pexpect for ssh-connection and commands.
@@ -53,6 +58,7 @@ ONT_SN=
 
 MONGO_URI= mongodb://mongo:27017/mydatabase
 ```
+
 Now, fill in each field with the necessary data
 
 When you filled each field accordingly, press `CTRL + X` , the following text should be prompted on the down left corner saying the following:
@@ -116,6 +122,7 @@ ONT_SN=
 
 MONGO_URI= mongodb://mongo:27017/mydatabase
 ```
+
 Now, fill in each field with the necessary data, using this installation metohd, OLT_USERNAME, OLT_PASSWORD and MONGO_URI are absolutely needed, you should also replace the mongo uri with your uri, the default value is for docker.
 
 When you filled each field accordingly, press `CTRL + X` , the following text should be prompted on the down left corner saying the following:
@@ -127,7 +134,6 @@ Press the letter `Y` as in Yes.
 
 `python ./run.py`
 
-
 ## FAQ
 
 ### I do not see my OLT model, what should i do?
@@ -138,6 +144,6 @@ You should test the program, and open an issue saying if it works or not, in tha
 
 See contributing.md inside /docs/
 
-### How is the code structured? 
+### How is the code structured?
 
 See program-structure.md inside /docs/
