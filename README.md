@@ -39,10 +39,6 @@ The goal is to automate the process of searching and obtaining all relevant info
 The installation is divided for [Windows](#windows-installation) and [Linux](#linux-installation) systems.   
 Although Windows is supported, it is recommended to use Linux for better performance.
 
-### Windows Installation
-
-TODO
-
 ### Linux Installation
 
 The quickest way to configure everything is by running the following command:
@@ -66,3 +62,9 @@ git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info && sudo sh ru
     ```bash
     sudo sh run.sh
     ```
+    
+### Windows Installation
+
+TODO
+
+
