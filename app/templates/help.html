@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+{% block title %}Ayuda Sobre Consulta OLT{% endblock %}
+
+{% block body %}
+<main>
+    <section class="help-section" id="basic-guide">
+        <h2>Guía Básica de Funcionamiento</h2>
+        <p>
+            La aplicación se encarga de pedirle datos importantes a un Optical
+            Network Terminal (ONT) específico para mostrarlos en una interfaz
+            gráfica web que facilita su lectura y comprensión.<br/>
+            Para poder acceder a esos datos del ONT, es necesario pasar por el
+            Optical Line Terminal (OLT) primero, que luego se encargará de
+            solicitar los datos requeridos al ONT.<br/>
+            Los datos se guardan en una base de datos que ayuda para agilizar
+            próximas búsquedas, ya que, si se hace una consulta con la misma ip y
+            número de serie dentro de un rango de 24 horas, se redirigirá a la
+            búsqueda anterior almacenada en la base de datos con el objetivo de no
+            tener que esperar el tiempo de procesamiento que requiere una nueva
+            consulta.
+        </p>
+    </section>
+
+    <section class="help-section" id="instructions">
+        <h2>Instrucciones de Uso</h2>
+        <ol>
+            <li>
+                En la página principal, encontrará dos rectángulos para poder ingresar
+                datos.
+            </li>
+            <li>
+                El primero, "OLT IP", se trata de la dirección ip de la OLT de la
+                empresa.
+            </li>
+            <li>
+                El segundo, "ONT SN", se trata del número de serie de la ONT del
+                cliente de donde se quieren recavar datos.
+            </li>
+            <li>Ingrese los datos requeridos en los dos campos mencionados.</li>
+            <li>Presione sobre el botón "Buscar".</li>
+            <li>
+                Si ya existe una consulta igual anterior en la base de datos, dentro
+                de un rango de 24 horas, se priorizará esa búsqueda para ahorrar
+                tiempo.
+            </li>
+            <li>
+                Si no hay ninguna coincidencia en la base de datos, se realizará una
+                nueva consulta, lo que puede tardar unos cuantos segundos (en
+                ambientes de pruebas ha tardado unos 8 segundos aproximádamente).
+            </li>
+            <li>
+                Una vez tenga la búsqueda lista, se redirigirá a la página con los
+                resultados.
+            </li>
+            <li>
+                La página de resultado consta de una tabla con los datos requeridos más la fecha
+                y la hora en la que se ha realizado la consulta.
+            </li>
+            <li>
+                Si deseas actualizar los datos para que se muestren los últimos
+                resultados, simplemente presiona sobre el botón "Actualizar Datos"
+                ubicado en la parte superior derecha de la tabla.
+            </li>
+        </ol>
+    </section>
+
+    <section class="help-section" id="technical-guide">
+        <h2>Guía Técnica</h2>
+        <p>
+            Si deseas obtener más información técnica acerca del funcionamiento
+            interno de la aplicación, visita el
+            <a href="https://github.com/MauroGuar/ONT-Info">proyecto en GitHub</a
+            >.
+        </p>
+    </section>
+</main>
+{% endblock %}
+

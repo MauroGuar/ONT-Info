@@ -27,7 +27,7 @@ def index():
 
 # Define a route for handling POST requests to "/buscar"
 @app.route("/buscar", methods=["POST"])
-def buscar():
+def search():
     try:
         if request.method == "POST":
             # Retrieve data from the POST request
@@ -80,3 +80,8 @@ def buscar():
     except personalized_exception as e:
         # Handle a specific custom exception by rendering the "index.html" template and passing the exception (e) for display
         return render_template("index.html", css_file="index_styles.css", e=e)
+
+
+@app.route("/ayuda")
+def help():
+    return render_template("help.html", css_file="help_styles.css")
