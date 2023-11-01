@@ -2,9 +2,9 @@
 
 ## Obtains and displays useful information about the status and operation of a specific ONT
 
-This project consists of a web application that is responsible for retrieving data from the requested ONT through an SSH connection to the OLT that makes the request. Then, save that query in the database so that the next time a new similar one is made within a certain time range, the website will use the already created query to be displayed.
+This project consists of a web application that is responsible for retrieving data from the requested ONT through an SSH connection to an OLT which makes the request. Then, save that query in the database so that the next time a new similar one is made within a certain time range(24h), the website will use the already created query to be displayed.
 
-The goal is to automate the process of searching and obtaining all relevant information from a customer's ONT.
+The goal is to automate the process of searching and obtaining all relevant information from a customer's ONT, knowing the ONT's ID, the OLT's IP, ssh user and ssh password.
 
 ![](app/static/img/functionality-explained.png)
 *A simple diagram showing the entire process of collecting and displaying the ONT information.*
@@ -17,12 +17,12 @@ The goal is to automate the process of searching and obtaining all relevant info
 
 ### Backend
 
-- **Flask**: A micro web framework for Python used to create the web application.
-- **Python**: The primary programming language for server-side logic and data processing.
+- **[Flask](https://flask.palletsprojects.com/)**: A micro web framework for Python used to create the web application.
+- **[Python](https://www.python.org/)**: The primary programming language for server-side logic and data processing.
 
 ### Database
 
-- **MongoDB**: A NoSQL database used to store and manage data for the application.
+- **[MongoDB](https://www.mongodb.com/)**: A NoSQL database used to store and manage data for the application.
 
 ### Frontend
 
@@ -37,7 +37,7 @@ The goal is to automate the process of searching and obtaining all relevant info
 ## 🛠️ Installation
 
 The installation is divided for [Windows](#windows-installation) and [Linux](#linux-installation) systems.   
-Although Windows is supported, it is recommended to use Linux for better performance.
+Although Windows is supported, it is recommended to use Linux for better performance and reliability.
 
 ### Linux Installation
 
