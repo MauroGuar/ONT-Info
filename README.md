@@ -69,4 +69,13 @@ git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info && sh run.sh
 
 TODO
 
+## Showcase
 
+### Index
+
+![Index page](showcase/index.png)
+
+
+### Search
+
+![Search page](showcase/search.png)
