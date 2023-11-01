@@ -16,3 +16,6 @@ OLT_PASSWORD = environ["OLT_PASSWORD"]
 
 # MONGO_URI: This variable stores the MongoDB connection URI, used to connect to the MongoDB database. It is read from the environment.
 MONGO_URI = environ["MONGO_URI"]
+
+# FLASK_SESSION_SECRET_KEY: This variable stores the secret key for the flask session, which is read from the environment.
+FLASK_SESSION_SECRET_KEY = environ["FLASK_SESSION_SECRET_KEY"]
