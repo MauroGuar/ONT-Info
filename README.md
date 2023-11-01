@@ -44,7 +44,7 @@ Although Windows is supported, it is recommended to use Linux for better perform
 The quickest way to configure everything is by running the following command:
 
 ```shell
-git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info && sudo sh run.sh
+git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info && sh run.sh
 ```
 
 **This command does the following:**
@@ -55,12 +55,14 @@ git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info && sudo sh ru
     git clone https://github.com/MauroGuar/ONT-Info.git
     ```
 2. Enters to the project folder
+   
     ```bash
     cd ONT-Info
     ```
-3. Runs the installation script (run.sh)
+4. Runs the installation script (run.sh)
+   
     ```bash
-    sudo sh run.sh
+    sh run.sh
     ```
     
 ### Windows Installation
