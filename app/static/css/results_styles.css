@@ -131,35 +131,27 @@ main {
 }
 
 .table {
-    width: 100%;
     border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+}
+
+.table tbody {
+    display: flex;
+    flex-direction: column;
 }
 
 .table th,
 .table td {
+    display: flex;
     padding: 8px;
     border: 1px solid #ddd;
     text-align: left;
+    width: 100%;
 }
 
 .td-key {
     font-weight: 550;
-}
-
-.table tr:nth-child(odd) .td-key {
-    background-color: #f2f2f2;
-}
-
-.table tr:nth-child(even) .td-key {
-    background-color: #e3e3e3;
-}
-
-.table tr:nth-child(odd) .td-value {
-    background-color: #e9f1ff;
-}
-
-.table tr:nth-child(even) .td-value {
-    background-color: #c4d4ffff;
 }
 
 .more_info {
@@ -167,17 +159,52 @@ main {
     margin: 4.4px 0 -8px 0;
 }
 
-.info {
-    color: var(--grey);
-    border: none;
+.more-info-btn {
+    align-items: center;
+    background-color: #0A66C2;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #ffffff;
     cursor: pointer;
-    padding: 5px;
-    background-color: var(--white);
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 10px;
+    max-width: 240px;
+    min-height: 30px;
+    min-width: 0px;
+    overflow: hidden;
+    margin-top: .5rem;
+    padding: 0px;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
 }
 
-.info:hover {
-    color: var(--black);
+.more-info-btn:hover {
+    background-color: #16437E;
+    color: #ffffff;
 }
+
+.more-info-btn:active {
+    background: #09223b;
+    color: rgb(255, 255, 255, .7);
+}
+
+.more-info-btn:disabled {
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .3);
+}
+
 
 @media screen and (max-width: 600px) {
     .table-container {

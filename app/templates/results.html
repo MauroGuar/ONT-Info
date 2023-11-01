@@ -30,8 +30,10 @@
             {% endfor %}
         </table>
         <div class="more_info">
-            <button class="info"> Show more</button>
+            <button id="more-info-btn" class="more-info-btn">Mostrar Más</button>
         </div>
     </section>
 </main>
+
+<script src="{{ url_for('static', filename='js/results_app.js') }}"></script>
 {% endblock %}

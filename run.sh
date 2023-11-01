@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 BLACK='\033[0;30m'
 RED='\033[0;31m'
@@ -29,6 +29,7 @@ echo "${ORANJE}"
 echo "H4sIAAAAAAAAA4WRQRLAIAgD77wi5174/++qGCTVjnpgkCTbqQB4xkE/0mAqOZPp7gGEZL33fkJo
 dTatjHkrpI7p18P4oCbJwC97mdgICSu2PKILyb75XiJzxorH549r5AcbmQu2PHwErNi81XNF5oKd
 ntKVZNSJoRKzMzY9ogvJuG8uO3cuy3cI1jeP6kWyF+Y1Bs64AgAA" | base64 -d | gunzip
+# cat your_ascii_art.txt | gzip | base64 # to generate the compressed code above
 echo "${NC}\n"
 
 current_dir="$(pwd)"
@@ -68,16 +69,17 @@ if [ ! -f "$env_file" ]; then
   stty -echo
   read olt_password
   stty echo
+  echo "\n${MAGENTA}> ${CYAN}Enter the flask session secret key:${NC} \c"
+  stty -echo
+  read flask_session_secret_key
+  stty echo
   cp ./app/.env.example $env_file
   sed -i "s/OLT_USERNAME=/&$olt_username/" "$env_file"
   sed -i "s/OLT_PASSWORD=/&$olt_password/" "$env_file"
+  sed -i "s/FLASK_SESSION_SECRET_KEY=/&$flask_session_secret_key/" "$env_file"
   echo "\n${YELLOW}-> ${CYAN}Configuration of the .env file completed.\n"
 fi
 
 echo "${YELLOW}-> ${CYAN}Running Docker Compose in detached mode\n."
-if [ "$(id -u)" != "0" ]; then
-  sudo docker compose up -d
-else
-  docker compose up -d
-fi
+docker compose up --build -d
 echo "\n${YELLOW}-> ${GREEN}Installation has been successfully completed.${NC}\n"

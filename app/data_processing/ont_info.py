@@ -32,36 +32,29 @@ def format_time(date_time):
 
 
 # Define a function to convert a query into a dictionary for display
-def convert_query_to_show(query, items_to_show):
+def convert_query_to_show(query):
     """
     Convert a query result into a dictionary with formatted date, time, and relevant information.
 
     Args:
         query (dict): The query result containing date_time and ont_info.
-        items_to_show (list): A list of specific items to display.
 
     Returns:
         str: The formatted date.
         str: The formatted time.
-        dict: A dictionary containing relevant information based on items_to_show.
+        dict: A dictionary containing relevant information.
     """
     date_time = query["date_time"]
     date = date_time.strftime("%d/%m/%Y")
     time = format_time(date_time)
     dictionary_to_show = {**query["ont_info"][0], **query["ont_info"][1]}
 
-    if items_to_show is not None:
-        # Filter the dictionary to include only specified items to show
-        dictionary_to_show = dict(
-            filter(lambda item: item[0] in items_to_show, dictionary_to_show.items())
-        )
-
     return date, time, dictionary_to_show
 
 
 # Define a function to update the queries
 def query_refresh(
-        olt_ip_introduced, ont_sn_introduced, items_to_show=None, debug_mode=False
+        olt_ip_introduced, ont_sn_introduced, debug_mode=False
 ):
     """
     Update the queries by creating a new one for a specific OLT IP and ONT serial number.
@@ -69,27 +62,25 @@ def query_refresh(
     Args:
         olt_ip_introduced (str): The OLT IP address.
         ont_sn_introduced (str): The ONT serial number.
-        items_to_show (list): A list of specific items to display (optional).
         debug_mode (bool): A flag for debugging mode (optional).
 
     Returns:
         tuple: A tuple containing date (str), time (str), and a dictionary of relevant information.
     """
     query = new_query(olt_ip_introduced, ont_sn_introduced, debug_mode)
-    data_to_show = convert_query_to_show(query, items_to_show)
+    data_to_show = convert_query_to_show(query)
     return data_to_show
 
 
 # Define a function for making a new request
 def new_request(
-        olt_ip_introduced, ont_sn_introduced, items_to_show=None, debug_mode=False):
+        olt_ip_introduced, ont_sn_introduced, debug_mode=False):
     """
     Make a new request for a specific OLT IP and ONT serial number.
 
     Args:
         olt_ip_introduced (str): The OLT IP address.
         ont_sn_introduced (str): The ONT serial number.
-        items_to_show (list): A list of specific items to display (optional).
         debug_mode (bool): A flag for debugging mode (optional).
 
     Returns:
@@ -100,8 +91,8 @@ def new_request(
     old_query_in_range = find_query_in_range(olt_ip_introduced, ont_sn_introduced)
     if old_query_in_range is None:
         query = new_query(olt_ip_introduced, ont_sn_introduced, debug_mode)
-        data_to_show = convert_query_to_show(query, items_to_show)
+        data_to_show = convert_query_to_show(query)
     else:
-        data_to_show = convert_query_to_show(old_query_in_range, items_to_show)
+        data_to_show = convert_query_to_show(old_query_in_range)
 
     return data_to_show

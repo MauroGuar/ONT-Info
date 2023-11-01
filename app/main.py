@@ -37,27 +37,15 @@ def buscar():
             olt_ip = request.form["olt_ip"]
             ont_sn = request.form["ont_sn"]
 
-            items_to_show = [
-                "run state",
-                "temperature(c)",
-                "description",
-                "last down cause",
-                "last up time",
-                "last down time",
-                "ont online duration",
-                "rx optical power(dbm)",
-                "olt rx ont optical power(dbm)",
-            ]
-
             debug_mode = True
 
             if "refresh-info" in request.form:
                 date, time, dictionary_to_show = query_refresh(
-                    olt_ip, ont_sn, items_to_show=items_to_show, debug_mode=debug_mode
+                    olt_ip, ont_sn, debug_mode=debug_mode
                 )
             else:
                 date, time, dictionary_to_show = new_request(
-                    olt_ip, ont_sn, items_to_show=items_to_show, debug_mode=debug_mode
+                    olt_ip, ont_sn, debug_mode=debug_mode
                 )
 
             session['olt_ip'] = olt_ip
@@ -73,7 +61,6 @@ def buscar():
 
 @app.route("/resultado")
 def resultado():
-    # Recupera los datos de la sesión
     olt_ip = session.get('olt_ip')
     ont_sn = session.get('ont_sn')
     date = session.get('date')
