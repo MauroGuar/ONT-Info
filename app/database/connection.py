@@ -1,13 +1,19 @@
+# Import necessary modules
 from flask_pymongo import PyMongo
 
 
 class MongoConnection:
-    # Singleton pattern: ensures only one instance of MongoConnection is created
+    """
+    A singleton class for MongoDB connection.
+    This pattern is a design principle that ensures a class has only one instance, and provides a global point of access to it.
+    """
 
     __instance = None
 
     def __new__(cls):
-        # Creates a new instance if it doesn't exist, otherwise returns the existing instance
+        """
+        Create a new instance if one doesn't exist.
+        """
 
         if cls.__instance is None:
             cls.__instance = super(MongoConnection, cls).__new__(cls)
@@ -15,32 +21,52 @@ class MongoConnection:
         return cls.__instance
 
     def init_app(self):
-        # Initializes the PyMongo instance
+        """
+        Initialize PyMongo instance.
+        """
 
         self.mongo = PyMongo()
 
     def init_app_with_app(self, app):
-        # Initializes the PyMongo instance with a Flask app
+        """
+        Initialize PyMongo instance with a Flask app.
+
+        Args:
+            app: A Flask application instance.
+        """
 
         self.mongo.init_app(app)
 
     def get_db(self):
-        # Returns the MongoDB database object
+        """
+        Get the database from the PyMongo instance.
+
+        Returns:
+            The database from the PyMongo instance.
+        """
 
         return self.__instance.mongo.db
 
     def get_queries_collection(self):
-        # Returns the 'queries' collection from the MongoDB database
+        """
+        Get the 'queries' collection from the database.
+
+        Returns:
+            The 'queries' collection from the database.
+        """
 
         return self.__instance.mongo.db.queries
 
 
 def init_db(app):
-    # Initializes the MongoDB connection with the Flask app
+    """
+    Initialize the database with a Flask app.
 
-    connection = (
-        MongoConnection()
-    )  # Create an instance of MongoConnection (singleton pattern)
-    connection.init_app_with_app(
-        app
-    )  # Initialize the PyMongo instance with the Flask app
+    Args:
+        app: A Flask application instance.
+    """
+
+    connection = MongoConnection()
+    connection.init_app_with_app(app)
+
+

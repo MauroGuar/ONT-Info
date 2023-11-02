@@ -30,7 +30,9 @@ class personalized_exception(Exception):
         Returns:
             str: A string representation of the exception including human-readable and technical error messages.
         """
-        return f"\nError: {self.human_readable}\nError técnico: {self.technical_error}"
+        return (
+            f"\nError: {self.human_readable}\nTechnical Error: {self.technical_error}"
+        )
 
 
 # Define a function for raising a personalized exception

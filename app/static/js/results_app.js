@@ -1,16 +1,29 @@
+/**
+ * Get the table, rows and moreInfoBtn from the DOM.
+ */
 const table = document.getElementsByClassName("table");
 const rows = document.querySelectorAll("tr");
 const moreInfoBtn = document.getElementById("more-info-btn");
 
+/**
+ * Define the items to show and a flag to indicate whether more information is being shown.
+ */
 let itemsToShow = ["run state", "temperature(c)", "description", "last down cause", "last up time", "last down time", "ont online duration", "rx optical power(dbm)", "olt rx ont optical power(dbm)", "ont ip 0 address/mask"];
 let isShowingMore = false;
 
+/**
+ * Add event listeners for DOMContentLoaded and click events.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     showRowsByKeyValue(itemsToShow);
 });
 
 moreInfoBtn.addEventListener('click', toggleShowMoreOrLessInfo);
 
+/**
+ * Show rows in the table based on the provided keys.
+ * @param {Array} itemsToShow - The keys of the rows to show.
+ */
 function showRowsByKeyValue(itemsToShow) {
     rows.forEach(row => {
         let tdKey = row.getElementsByClassName("td-key");
@@ -27,6 +40,9 @@ function showRowsByKeyValue(itemsToShow) {
     stylizeRow();
 }
 
+/**
+ * Show all rows in the table.
+ */
 function showAllRows() {
     rows.forEach(row => {
         row.style.display = "flex";
@@ -34,6 +50,9 @@ function showAllRows() {
     stylizeRow();
 }
 
+/**
+ * Toggle between showing more or less information in the table.
+ */
 function toggleShowMoreOrLessInfo() {
     if (isShowingMore) {
         showRowsByKeyValue(itemsToShow);
@@ -45,6 +64,9 @@ function toggleShowMoreOrLessInfo() {
     isShowingMore = !isShowingMore;
 }
 
+/**
+ * Apply styles to the rows in the table.
+ */
 function stylizeRow() {
     i = 0;
     rows.forEach(row => {
@@ -66,3 +88,4 @@ function stylizeRow() {
         }
     });
 }
+

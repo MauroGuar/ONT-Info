@@ -108,6 +108,7 @@ def get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode=False):
         # Extract and parse the ONT information from the prompt into a dictionary.
         ont_info_dic = get_dictionary_from_prompt(ont_info_prompt)
 
+        # If the ONT is offline, the optical info cannot be obtained, so an empty dictionary is returned.
         if ont_info_dic["run state"] == "offline":
             ont_optical_info_dic = {}
         else:

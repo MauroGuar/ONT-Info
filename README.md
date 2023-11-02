@@ -6,7 +6,7 @@ This project consists of a web application that is responsible for retrieving da
 
 The goal is to automate the process of searching and obtaining all relevant information from a customer's ONT.
 
-![](app/static/img/functionality-explained.png)
+![](showcase/functionality-explained.png)
 *A simple diagram showing the entire process of collecting and displaying the ONT information.*
 
 ## 📟 Supported OLT Models
@@ -92,3 +92,13 @@ To perform a correct installation in Windows, follow the following steps:
 
 This will create the "flask-app" and "mongo" services with all dependencies installed and configured.
 
+
+## Showcase
+
+### Index
+
+![Index page](showcase/index.png)
+
+### Search
+
+![Search page](showcase/search.png)

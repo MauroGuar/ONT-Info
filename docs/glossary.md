@@ -19,4 +19,3 @@
 | Db           | Data Base          |
 | Col          | Collection         |
 | Info         | Information        |
-|              |                    |

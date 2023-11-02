@@ -19,19 +19,29 @@ app.config["MONGO_URI"] = MONGO_URI
 init_db(app)
 
 
-# Define a route for the root URL ("/")
 @app.route("/")
 def index():
     """
-    This function defines the behavior for the root URL ("/").
-    It renders an HTML template called "index.html" and passes a CSS file ("index_styles.css") to the template.
+    Define a route for the root URL ("/").
+
+    Returns:
+        render_template: Renders an HTML template called "index.html" and passes a CSS file ("index_styles.css") to the template.
     """
     return render_template("index.html", css_file="index_styles.css")
 
 
-# Define a route for handling POST requests to "/buscar"
 @app.route("/buscar", methods=["POST"])
 def buscar():
+    """
+    Define a route for handling POST requests to "/buscar".
+
+    In this function, the session object is used to store data that you want to persist across requests.
+    When a client makes a new request, the data stored in the session object is retrieved.
+
+    Returns:
+        redirect: Redirects to the 'resultado' route if the request is successful.
+        render_template: Renders an HTML template called "index.html" and passes a CSS file ("index_styles.css") to the template if an exception occurs.
+    """
     try:
         if request.method == "POST":
             olt_ip = request.form["olt_ip"]
@@ -48,19 +58,29 @@ def buscar():
                     olt_ip, ont_sn, debug_mode=debug_mode
                 )
 
+            # Store the results in session variables
             session['olt_ip'] = olt_ip
             session['ont_sn'] = ont_sn
             session['date'] = date
             session['time'] = time
             session['dictionary_to_show'] = dictionary_to_show
 
+            # Redirect to the 'resultado' route where these session variables will be used
             return redirect(url_for('resultado'))
     except personalized_exception as e:
         return render_template("index.html", css_file="index_styles.css", e=e)
 
 
+
+
 @app.route("/resultado")
 def resultado():
+    """
+    Define a route for "/resultado".
+
+    Returns:
+        render_template: Renders an HTML template called "results.html" and passes a CSS file ("results_styles.css") and other variables to the template.
+    """
     olt_ip = session.get('olt_ip')
     ont_sn = session.get('ont_sn')
     date = session.get('date')
@@ -80,4 +100,10 @@ def resultado():
 
 @app.route("/ayuda")
 def help():
+    """
+    Define a route for "/ayuda".
+
+    Returns:
+        render_template: Renders an HTML template called "help.html" and passes a CSS file ("help_styles.css") to the template.
+    """
     return render_template("help.html", css_file="help_styles.css")
