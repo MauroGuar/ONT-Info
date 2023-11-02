@@ -37,7 +37,7 @@ def buscar():
             olt_ip = request.form["olt_ip"]
             ont_sn = request.form["ont_sn"]
 
-            debug_mode = True
+            debug_mode = False
 
             if "refresh-info" in request.form:
                 date, time, dictionary_to_show = query_refresh(

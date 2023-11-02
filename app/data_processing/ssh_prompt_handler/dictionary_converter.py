@@ -108,11 +108,16 @@ def get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode=False):
         # Extract and parse the ONT information from the prompt into a dictionary.
         ont_info_dic = get_dictionary_from_prompt(ont_info_prompt)
 
-        # Retrieve the optical information prompt based on the ONT information.
-        ont_optical_info_prompt = get_ont_optical_info_prompt(ssh_session, ont_info_dic)
+        if ont_info_dic["run state"] == "offline":
+            ont_optical_info_dic = {}
+        else:
+            # Retrieve the optical information prompt based on the ONT information.
+            ont_optical_info_prompt = get_ont_optical_info_prompt(
+                ssh_session, ont_info_dic
+            )
 
-        # Extract and parse the optical information from the prompt into a dictionary.
-        ont_optical_info_dic = get_dictionary_from_prompt(ont_optical_info_prompt)
+            # Extract and parse the optical information from the prompt into a dictionary.
+            ont_optical_info_dic = get_dictionary_from_prompt(ont_optical_info_prompt)
 
         # Close the SSH session.
         close_session(ssh_session)
