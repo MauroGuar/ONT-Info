@@ -94,7 +94,7 @@ def get_ont_info_dictionaries(olt_ip, ont_sn, debug_mode=False):
     """
     if not debug_mode:
         # Create a character translation dictionary to replace certain characters in ONT SN.
-        sn_dictionary = str.maketrans("QOIZS", "00122")
+        sn_dictionary = str.maketrans("QOIZS", "00125")
 
         # Validate and potentially modify the OLT IP and ONT SN using the provided character translation.
         olt_ip, ont_sn = ip_sn_validator(olt_ip, ont_sn, 16, 16, sn_dictionary)

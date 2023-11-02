@@ -62,9 +62,33 @@ git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info && sudo sh ru
     ```bash
     sudo sh run.sh
     ```
+This will create the "flask-app" and "mongo" services with all dependencies installed and configured.
     
 ### Windows Installation
 
+To perform a correct installation in Windows, follow the following steps:
 
+1. Clone the repository
+    ```bash
+    git clone https://github.com/MauroGuar/ONT-Info.git
+    ```
 
+2. Enter to the project folder
+
+3. Go to the "app" folder
+
+4. Copy the file ".env.example" and rename it ".env"
+
+5. Edit the .env file and put your credentials in "OLT_USERNAME", "OLT_PASSWORD" and "FLASK_SESSION_SECRET_KEY"
+
+6. If you do not have docker installed, [download docker desktop for windows](https://docs.docker.com/desktop/install/windows-install/)
+
+7. From a terminal, in the main directory, run the command
+    ```bash
+    docker compose up -d
+    ```
+
+8. Docker compose will run in detached mode
+
+This will create the "flask-app" and "mongo" services with all dependencies installed and configured.
 
