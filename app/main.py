@@ -59,18 +59,16 @@ def buscar():
                 )
 
             # Store the results in session variables
-            session['olt_ip'] = olt_ip
-            session['ont_sn'] = ont_sn
-            session['date'] = date
-            session['time'] = time
-            session['dictionary_to_show'] = dictionary_to_show
+            session["olt_ip"] = olt_ip
+            session["ont_sn"] = ont_sn
+            session["date"] = date
+            session["time"] = time
+            session["dictionary_to_show"] = dictionary_to_show
 
             # Redirect to the 'resultado' route where these session variables will be used
-            return redirect(url_for('resultado'))
+            return redirect(url_for("resultado"))
     except personalized_exception as e:
         return render_template("index.html", css_file="index_styles.css", e=e)
-
-
 
 
 @app.route("/resultado")
@@ -81,11 +79,11 @@ def resultado():
     Returns:
         render_template: Renders an HTML template called "results.html" and passes a CSS file ("results_styles.css") and other variables to the template.
     """
-    olt_ip = session.get('olt_ip')
-    ont_sn = session.get('ont_sn')
-    date = session.get('date')
-    time = session.get('time')
-    dictionary_to_show = session.get('dictionary_to_show', {})
+    olt_ip = session.get("olt_ip")
+    ont_sn = session.get("ont_sn")
+    date = session.get("date")
+    time = session.get("time")
+    dictionary_to_show = session.get("dictionary_to_show", {})
 
     return render_template(
         "results.html",

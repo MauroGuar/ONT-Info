@@ -13,11 +13,11 @@ The `main.py` file is the main entry point of the Flask web application. It sets
 
 ### /app/config.py
 
-The `config.py` file is responsible for managing the configuration of your application. It finds and loads the `.env` file from your project directory. This file contains environment variables that are used throughout your application. The `config.py` file retrieves these variables.
+The `config.py` file is responsible for managing the configuration of the application. It finds and loads the `.env` file from the project directory. This file contains environment variables that are used throughout the application. The `config.py` file retrieves these variables.
 
 ### /app/.env and /app/.env.example
 
-The `.env` and `.env.example` files are used to store environment variables for your application. These variables include `OLT_USERNAME` and `OLT_PASSWORD` for SSH connection credentials to an OLT device, `MONGO_URI` for the MongoDB connection URI, and `FLASK_SESSION_SECRET_KEY` for the secret key used in Flask sessions. The `.env.example` file serves as a template, while the actual values are stored in the `.env` file. The values are kept empty in the `.env.example` file for security reasons, and actual values should be filled in the `.env` file on your local machine.  
+The `.env` and `.env.example` files are used to store environment variables for the application. These variables include `OLT_USERNAME` and `OLT_PASSWORD` for SSH connection credentials to an OLT device, `MONGO_URI` for the MongoDB connection URI, and `FLASK_SESSION_SECRET_KEY` for the secret key used in Flask sessions. The `.env.example` file serves as a template, while the actual values are stored in the `.env` file. The values are kept empty in the `.env.example` file for security reasons, and actual values should be filled in the `.env` file on the local machine.  
 It is important to add that the `.env` file is ignored by git in the `.gitignore` file, so the secret credentials are not published.
 
 ### /app/data_processing/
@@ -89,3 +89,20 @@ The `css` directory contains Cascading Style Sheets (CSS) files that style the H
 ### /app/templates
 
 The `templates` module contains the HTML templates that define the structure and layout of the web pages in the application. These templates can be dynamically rendered with data by the application, allowing for user-specific views and content.
+
+### /app/templates/base.html
+
+The `base.html` file is a base template for the web application. It sets up the basic HTML structure, including the `DOCTYPE`, `html`, `head`, and `body` tags. Inside the `head` tag, it defines meta tags for character set and viewport, a title block that can be overridden by child templates, and links to CSS stylesheets. The `body` tag contains a header with a logo, title, and a help link. The body of the page is defined by a `block` tag that can be filled in by child templates. This base template provides a consistent layout and style for all pages in the application, while allowing flexibility for individual pages to define their own content.  
+The Jinja2 engine is what allows you to make templates with inheritance.
+
+### /app/templates/index.html
+
+The `index.html` file is a template for the main page of the web application. It extends the base template, `base.html`, and defines the content for the `title` and `body` blocks. The body contains a form for users to enter an OLT IP and an ONT SN, which are then sent to the `/buscar` route on form submission. There's also a section to display error messages and an image. The form includes a button for submitting the form, and a message that is displayed while the request is being processed. The results of the request are displayed in a `div` element with the id `result`. At the end of the file, a JavaScript file, `index_app.js`, is linked to add interactivity to the page.
+
+### /app/templates/help.html
+
+The `help.html` file is a template for the help page of the web application. It extends the base template, `base.html`, and defines the content for the `title` and `body` blocks. The body contains several sections with information on how to use the application, including a basic guide, usage instructions, a technical guide, and information on what to do in case of technical problems. Each section is marked with an `h2` tag for the title and a `p` or `ol` tag for the content. The technical guide section includes a link to the project on GitHub for more technical information. This template provides helpful information to users on how to use the application.
+
+### /app/templates/results.html
+
+The `results.html` file is a template for the results page of the web application. It extends the base template, `base.html`, and defines the content for the `title` and `body` blocks. The body contains a section with a table that displays the results of a query. The table includes the OLT IP, ONT SN, date and time of the query, and key-value pairs from the query result. There's also a form to submit a new request to refresh the data, and a button to show more information. At the end of the file, a JavaScript file, `results_app.js`, is linked to add interactivity to the page. This template presents the query results in a user-friendly format.
