@@ -31,6 +31,34 @@ form.addEventListener('submit', function () {
 window.onunload = function (e) {
 }
 
+/**
+ * @type {Array}
+ * @description Array of IP options for OLT.
+ */
+const oltIpOptions = ["172.17.254.34", "172.17.254.8", "172.17.254.9", "172.17.254.4", "172.17.254.30", "172.17.254.14", "172.17.254.21", "172.17.254.15", "172.17.254.45"];
+
+/**
+ * @type {HTMLSelectElement}
+ * @description The select element for OLT IP options.
+ */
+const selectOltIp = document.getElementById("olt_ip");
+
+/**
+ * Populates the selectOltIp element with options from oltIpOptions array.
+ */
+oltIpOptions.forEach(olt_ip => {
+    /**
+     * @type {HTMLOptionElement}
+     * @description An option element for the selectOltIp element.
+     */
+    let option = document.createElement("option");
+    option.value = olt_ip;
+    option.text = olt_ip;
+    selectOltIp.appendChild(option);
+});
+
+
+
 
 
 

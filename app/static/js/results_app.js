@@ -2,7 +2,7 @@ const table = document.getElementsByClassName("table");
 const rows = document.querySelectorAll("tr");
 const moreInfoBtn = document.getElementById("more-info-btn");
 
-let itemsToShow = ["run state", "temperature(c)", "description", "last down cause", "last up time", "last down time", "ont online duration", "rx optical power(dbm)", "olt rx ont optical power(dbm)"];
+let itemsToShow = ["run state", "temperature(c)", "description", "last down cause", "last up time", "last down time", "ont online duration", "rx optical power(dbm)", "olt rx ont optical power(dbm)", "ont ip 0 address/mask"];
 let isShowingMore = false;
 
 document.addEventListener('DOMContentLoaded', () => {

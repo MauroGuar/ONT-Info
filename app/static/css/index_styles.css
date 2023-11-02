@@ -122,6 +122,15 @@ form {
     padding: 0.8em;
 }
 
+.box select {
+    border: 0.1rem solid #000000;
+    height: 2em;
+    width: 100%;
+    padding: 0 0.8em;
+    background-color: transparent;
+}
+
+
 .btns {
     display: flex;
     align-items: center;
