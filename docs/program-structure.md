@@ -1,107 +1,91 @@
 # Program Structure
 
-The program consists of various sub-divided directories, each one of them take care of their own tasks. All of it starts from run.py, /run.py is the command you should optimally execute in order to get the app up and running.
+The structure of the program is mainly made based on Flask's structuring standards, with some personal modifications.  
+The project is divided into two large sections, the project path "/" and the "app/" directory.  
+In the main directory, there are the files for the execution and explanation of the program.  
+In the app directory you will find the files and modules with the code necessary for the program to function.
 
-The rest of the program is inside /app/
-
-## inside /app/
-
-### /app/config.py
-
-The config.py file contains all the hardcoded data you should put in in order needed for the program to run, like the olt_username which is the ssh username, the olt_password which is the ssh password of that user, etc
-config.py is used by many files, mainly main.py
+## Inside /app/
 
 ### /app/main.py
 
-The main.py file is called by run.py and contains all the flask routes containing the "classical" main structure, mostly function calls with personalized data, this is arguably the most important part of the code and the "hearth" of it, here you can set the items_to_show to the user, set Debug mode, etc
+The `main.py` file is the main entry point of the Flask web application. It sets up the Flask application, configures and initializes a MongoDB database connection, and defines routes for handling different URLs. Each route is associated with a function that processes data and returns a response to the client. The functions handle tasks such as rendering HTML templates, processing form data, storing results in session variables, and redirecting to other routes.
+
+### /app/config.py
+
+The `config.py` file is responsible for managing the configuration of your application. It finds and loads the `.env` file from your project directory. This file contains environment variables that are used throughout your application. The `config.py` file retrieves these variables.
+
+### /app/.env and /app/.env.example
+
+The `.env` and `.env.example` files are used to store environment variables for your application. These variables include `OLT_USERNAME` and `OLT_PASSWORD` for SSH connection credentials to an OLT device, `MONGO_URI` for the MongoDB connection URI, and `FLASK_SESSION_SECRET_KEY` for the secret key used in Flask sessions. The `.env.example` file serves as a template, while the actual values are stored in the `.env` file. The values are kept empty in the `.env.example` file for security reasons, and actual values should be filled in the `.env` file on your local machine.  
+It is important to add that the `.env` file is ignored by git in the `.gitignore` file, so the secret credentials are not published.
 
 ### /app/data_processing/
 
-The data_processing directory is where most part of the code is, the task/mission of all this code is basically 
-to be the back end of the page, this includes but not limited to:
+The `data_processing` module is responsible for collecting, processing, and returning data from the entire application.  
 
-* Error handling
-* ssh operations (entering an ssh session, executing commands, reading the output of commands)
-* db data handling
-* data parsing
-* displaying/showing data
+### /app/data_processing/ont_info.py
 
-#### /app/data_processing/db_handler/
+The `ont_info.py` file is like the "main" of the entire `data_processing` module because it calls and uses all functions of the rest of the internal modules in order.  
+It contains functions for handling and processing data related to Optical Line Terminal (OLT) and Optical Network Terminal (ONT) devices. It includes functions to format time, convert query results into a user-friendly format, refresh queries by creating new ones for specific OLT IP and ONT serial numbers, and make new requests for specific OLT IP and ONT serial numbers. These functions are used to manage and process data from the OLT and ONT devices, handle queries related to these devices, and present the data in a suitable format.
 
-The db_handler directory contains all the back-end logic used to comunicate with the database and also handle the queries
+### /app/data_processing/ssh_prompt_handler/
 
-##### /app/data_processing/db_handler/query_history.py
+The `ssh_prompt_handler` module is responsible for establishing the ssh connection with the OLT, collecting and validating the ONT data and transforming it into dictionary format.
 
-The query_history.py file uses the functions and class provided by connection.py, this contains all the logic that are related to the buttons to make a db proper query.
+### /app/data_processing/ssh_prompt_handler/dictionary_converter.py
 
-#### /app/data_processing/error_handler/
+The `dictionary_converter.py` file is like the "main" of the ssh `prompt_handler_module` because it calls and uses all functions of modules in order.  
+It is responsible for converting and returning the data collected from the ONT devices via the SSH connection with the OLT into a dictionary format. This conversion facilitates easier data manipulation and processing within the application.
 
-The error_handler directory contains the error and validation functions
+### /app/data_processing/ssh_prompt_handler/session_spawn.py
 
-##### /app/data_processing/error_handler/errors.py
+The `session_spawn.py` is responsible for establishing and managing the SSH session with the OLT. It may handle tasks such as initiating the connection, handling authentication, and managing the session lifecycle.
 
-The errors.py file contains the error class and error function that is used throughout the program
+### /app/data_processing/ssh_prompt_handler/ont_prompt.py
 
-##### /app/data_processing/error_handler/user_input
+The `ont_prompt.py` file interacts with the ONT devices via the established SSH session. It handles tasks such as sending commands to the ONT, parsing the responses, and handling any errors or exceptions that occur during the interaction. In the end it returns the prompt obtained from the ONT.
 
-The user_input.py file verifies the data introduced by the user and verifies its correct, also applying some conversion handling because of human input mistakes
+### /app/data_processing/ssh_prompt_handler/prompt_analysis.py
 
-#### /app/data_processing/ssh_prompt_handler/
+The `prompt_analysis.py` extracts key-value pairs from the ONT prompt and returns them as a dictionary. It uses a regular expression to match key-value pairs in the table prompt, where keys and values are separated by colons. The function initializes an empty dictionary, finds all matches using the regular expression pattern, iterates through the matches to extract key-value pairs, and adds them to the dictionary. The keys and values are converted to lowercase for consistency.
 
-The ssh_prompt_handler directory handles the ssh connection, commanding, reading, parsing(also validating user input) and debugmode, all of this while having exhaustively handling the errors of each part.
+### /app/data_processing/db_handler/
 
-* creates and manages the initial part of the ssh connection to the olt
-* mimics the human behaviour, writing commands and expecting patterns/strings before taking actions
-* read and parses the console output using regex
+The `db_handler` module is responsible for interacting with the database. It handles tasks such as establishing a connection to the database, executing queries, fetching results, and closing the connection. This module is crucial for storing and retrieving the data processed by the application.
 
-##### /app/data_processing/ssh_prompt_handler/dictionary_converter.py
+### /app/data_processing/db_handler/query_history.py
 
-The dictionary_converter.py file retrieves ONT information and optical information dictionaries for a given OLT IP and ONT serial number, also handling debugmode
+The `query_history` file checks if a query already exists in a certain time range (default is 24 hours). If it exists, it returns it and if not, it creates a new one by calling the `ssh_prompt_handler` module to obtain the ONT dictionaries and creates a JSON where it stores the date and time of the query and the OLT and ONT data. Then, it saves this JSON in the database and returns the query to be displayed on the web page.
 
-##### /app/data_processing/ssh_prompt_handler/ont_prompt.py
+### /app/data_processing/error_handler/
 
-The ont_prompt.py file execute the commands and expects patterns/strings before taking actions, all of this already inside of the ssh session using pexpect, then return what it reads in the terminal
+The `error_handler` module is responsible for managing and handling errors that occur within the application. It handles tasks such as logging errors, sending error notifications, and possibly providing recovery strategies.
 
-##### /app/data_processing/ssh_prompt_handler/prompt_analysis.py
+### /app/data_processing/error_handler/errors.py
 
-The prompt_analysis.py file process the raw data given by ont_prompt using regex, storing the data key and value inside a dictionary
+The `errors.py` file defines a custom exception class, `personalized_exception`, and a function, `error_return`, for raising this exception. The `personalized_exception` class inherits from the built-in `Exception` class and adds two attributes: `human_readable` and `technical_error`. These attributes are used to store human-readable and technical error messages, respectively. The `__str__` method of the class returns a formatted string representation of the exception. The `error_return` function takes two arguments, a human-readable error message and a technical error message, and raises a `personalized_exception` with these messages. This file is used to handle errors in a personalized way throughout the application.
 
-##### /app/data_processing/ssh_prompt_handler/session_spawn.py
+### /app/data_processing/error_handler/user_input.py
 
-The session_spawn.py file starts a connection with the olt, until the point the olt gives a prompt
+The `user_input.py` file is responsible for validating and processing user inputs. It contains functions to validate IPv4 addresses and serial numbers, ensuring they meet specific conditions such as length, base, and character requirements. It also includes a function to retrieve input from command line arguments and perform the necessary validation. If the expected arguments are not provided, a custom error is raised. This file is essential for handling user input in a secure and structured manner.
 
-#### /app/data_processing/ont_info.py
+### /app/database
 
-The ont_info.py file defines the main back-end functions that handle the database queries with the front end:
+The `database` module takes care of all tasks directly related to the database. In this case it is only responsible for establishing the connection to the database.
 
-* formats the time from utc to gmt-3
-* filters which data to show and how to show it
-* handles the refresh of queries and the logic behind it(if its older than 24 hours create a new one, etc)
+### /app/database/connection.py
 
-### /app/database/
+The `connection.py` file is responsible for managing the MongoDB connection for the application. It defines a singleton class, `MongoConnection`, which ensures that only one instance of the MongoDB connection exists throughout the application. This class includes methods to initialize the PyMongo instance, initialize it with a Flask app, and retrieve the database and 'queries' collection from the instance. The `init_db` function is defined outside the class to initialize the database with a Flask app. This file is crucial for ensuring efficient and consistent database operations in the application.
 
-The database directory basically contains the file connection.py, but here should be all the required code to handle connections with the database.
+### /app/static
 
-#### /app/database/connection.py
+The `static` module servs the static files in the application. These files could include CSS, JavaScript, images, and other assets that are not dynamically generated. This module is crucial for providing the necessary resources for the client-side rendering of the application.
 
-The file connection.py is pretty self explanatory, this file defines many functions that would handle connection with the running database
+### /app/static/css; /app/static/img and /app/static/js
 
-### /app/static/
+The `css` directory contains Cascading Style Sheets (CSS) files that style the HTML elements of the web application, the `img` directory stores image files used in the application, such as icons and background images, and the `js` directory contains JavaScript files that add interactivity to the web pages.
 
-The static directory contains the front-end stuff used to make the page look nice and properly, this includes css, images, javascript scripts, and some jsons for testing.
+### /app/templates
 
-### /app/templates/
-
-The templates directory contains all the flask's templates used for the page
-
-#### /app/templates/base.html
-
-The file base.html basically is the header of the page, containing the help button, the name of the page and the logo, this is used throughout the page
-
-#### /app/templates/index.html
-
-The file index.html is the index, the first page you enter and where users will enter the corresponding data, then users will push the "Buscar" button, that searches the latest entry in the database, if there is none or the entries are too old(24 hours or more), then just send a new request to the olt. Errors should be shown in this page
-
-#### /app/templates/results.html
-
-The file results.html is the page users are sent after searching for some data, this is a basic page that formats the retrieved json in a clean and simple way, being easy to read and comprehend, there is also the "Actualizar datos" button that refreshes the data, sending a new request to the olt, then refreshing the page showing the new data
+The `templates` module contains the HTML templates that define the structure and layout of the web pages in the application. These templates can be dynamically rendered with data by the application, allowing for user-specific views and content.
