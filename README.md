@@ -95,10 +95,10 @@ This will create the "flask-app" and "mongo" services with all dependencies inst
 
 ## Showcase
 
-### Index
+### Index Page
 
 ![Index page](showcase/index.png)
 
-### Search
+### Result Page
 
 ![Search page](showcase/search.png)
