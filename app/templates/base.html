@@ -5,27 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/' + css_file) }}">
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header class="top">
-        <div class="header">
-            <a href="/">
+<header class="top">
+    <div class="header">
+        <a href="/">
             <div class="logo">
-                <img src="https://itcsa.net.ar/assets/images/itc-brand.svg" alt="" >
+                <img src="https://itcsa.net.ar/assets/images/itc-brand.svg" alt="">
                 <h4>CONSULTA ONT</h4>
             </div>
-            </a>
-            <div class="help">
-                <a href="#" class="help_menu" id="help"><i class="fa-solid fa-question"></i> Ayuda</a>
-            </div>
+        </a>
+        <div class="help">
+            <a href="ayuda" class="help_menu" id="help"><i class="fa-solid fa-question"></i> Ayuda</a>
         </div>
-    </header>
-    {% block body %}
-    {% endblock %}
+    </div>
+</header>
+{% block body %}
+{% endblock %}
 </body>
 
 </html>

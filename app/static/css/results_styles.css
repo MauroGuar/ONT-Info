@@ -1,4 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+:root {
+    --orange: #fe7f2d;
+    --black: #000000;
+    --grey: #393939;
+    --white: #ffffff;
+    --box-shadow: 0 2rem 1.5rem rgba(0, 0, 0, 0.1);
+}
 
 body {
     margin: 0;
@@ -6,7 +14,7 @@ body {
 }
 
 main {
-    font-family: Roboto;
+    font-family: "Open Sans";
     display: flex;
     flex-wrap: wrap;
 }
@@ -45,6 +53,65 @@ main {
     font-weight: 100;
 }
 
+.refresh-date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.refresh-btn {
+    appearance: none;
+    background-color: #2ea44f;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.refresh-btn:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+
+.refresh-btn:hover {
+    background-color: #2c974b;
+}
+
+.refresh-btn:focus {
+    box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+    outline: none;
+}
+
+.refresh-btn:disabled {
+    background-color: #94d3a2;
+    border-color: rgba(27, 31, 35, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: default;
+}
+
+.refresh-btn:active {
+    background-color: #298e46;
+    box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
 .tb-date {
     margin: 0;
     font-weight: 100;
@@ -64,36 +131,80 @@ main {
 }
 
 .table {
-    width: 100%;
     border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+}
+
+.table tbody {
+    display: flex;
+    flex-direction: column;
 }
 
 .table th,
 .table td {
+    display: flex;
     padding: 8px;
     border: 1px solid #ddd;
     text-align: left;
+    width: 100%;
 }
 
 .td-key {
     font-weight: 550;
 }
 
-.table tr:nth-child(odd) .td-key {
-    background-color: #f2f2f2;
+.more_info {
+    text-align: right;
+    margin: 4.4px 0 -8px 0;
 }
 
-.table tr:nth-child(even) .td-key {
-    background-color: #e3e3e3;
+.more-info-btn {
+    align-items: center;
+    background-color: #0A66C2;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 10px;
+    max-width: 240px;
+    min-height: 30px;
+    min-width: 0px;
+    overflow: hidden;
+    margin-top: .5rem;
+    padding: 0px;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
 }
 
-.table tr:nth-child(odd) .td-value {
-    background-color: #e9f1ff;
+.more-info-btn:hover {
+    background-color: #16437E;
+    color: #ffffff;
 }
 
-.table tr:nth-child(even) .td-value {
-    background-color: #c4d4ffff;
+.more-info-btn:active {
+    background: #09223b;
+    color: rgb(255, 255, 255, .7);
 }
+
+.more-info-btn:disabled {
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, .08);
+    color: rgba(0, 0, 0, .3);
+}
+
 
 @media screen and (max-width: 600px) {
     .table-container {

@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  app:
+    container_name: flask-app
+    hostname: web_api
+    build: .
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_APP: main
+      FLASK_RUN_HOST: 0.0.0.0
+      TEMPLATES_AUTO_RELOAD: 'True'
+      FLASK_ENV: development
+    ports:
+      - '80:5000'
+    depends_on:
+      - database
+    links:
+      - database
+    volumes:
+      - ./app:/app
+    networks:
+      - olt-connection
+  database:
+    image: mongo:4-focal
+    container_name: mongo
+    hostname: mongo
+    volumes:
+      - ./mongo-volume:/data/db
+      - ./mongo-volume/log:/var/log/mongodb/
+    ports:
+      - '27017:27017'
+    networks:
+      - olt-connection
+networks:
+  olt-connection:
+    driver: bridge
+volumes:
+  persistent:

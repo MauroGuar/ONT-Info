@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;@600   &display=swap");
+
+html,
+body {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#basic-guide {
+    margin-top: 2rem;
+}
+
+.help-section {
+    margin: 0rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 0.5rem;
+}
+
+.help-section h2 {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+}
+
+.help-section p,
+ol {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    text-align: justify;
+}
+
+.help-section span {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.help-section ol {
+    padding: 0;
+    list-style-type: none;
+    counter-reset: custom-counter;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.help-section ol li {
+    counter-increment: custom-counter;
+    /* margin-bottom: 10px; */
+}
+
+.help-section ol li::before {
+    content: counter(custom-counter);
+    font-weight: bold;
+    margin-right: 0.2rem;
+}
+
+
