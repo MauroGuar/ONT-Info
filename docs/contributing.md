@@ -4,7 +4,7 @@
 
 ## Read the [Glossary](./glossary.md) to understand technical concepts
 
-## Good Practices
+## Guidelines
 
 ### Always Comment the Code
 

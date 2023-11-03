@@ -92,8 +92,18 @@ To perform a correct installation in Windows, follow the following steps:
 
 This will create the "flask-app" and "mongo" services with all dependencies installed and configured.
 
+### Installation Tips (Both Operative Systems)
 
-## Showcase
+Here are some important tips to keep in mind when performing the installation:
+
+1. If your OLT's IP is in the range of Docker's internal network, 172.16.0.1 to 172.31.255.254, then you will need to configure a static route for your OLT's network to use your network interface gateway.
+    - You can do this on Linux with the `iproute2` package, by running the following command:
+    ```bash
+    sudo ip route add {YOUR OLT IP} via {YOUR GATEWAY IP} 
+    ```
+
+
+## 🖼️ Showcase
 
 ### Index Page
 
@@ -102,3 +112,8 @@ This will create the "flask-app" and "mongo" services with all dependencies inst
 ### Result Page
 
 ![Search page](showcase/search.png)
+
+## 🌱 Contributing
+
+If you want to collaborate with the project to add features or fix some bugs, read the [contributing guide](docs/contributing.md).  
+The repository owner is David Portales, so he is the one in charge of everything related to contributions.
