@@ -7,25 +7,40 @@ const moreInfoBtn = document.getElementById("more-info-btn");
 
 /**
  * Define the items to show and a flag to indicate whether more information is being shown.
+ * The items to show are the keys of the rows to show.
+ * The flag is used to toggle between showing more or less information.
  */
-let itemsToShow = ["run state", "temperature(c)", "description", "last down cause", "last up time", "last down time", "ont online duration", "rx optical power(dbm)", "olt rx ont optical power(dbm)", "ont ip 0 address/mask"];
+let itemsToShow = [
+    "run state",
+    "temperature(c)",
+    "description",
+    "last down cause",
+    "last up time",
+    "last down time",
+    "ont online duration",
+    "rx optical power(dbm)",
+    "olt rx ont optical power(dbm)",
+    "ont ip 0 address/mask",
+];
 let isShowingMore = false;
 
 /**
  * Add event listeners for DOMContentLoaded and click events.
+ * When the DOM is loaded, show the rows in the table based on the itemsToShow array.
  */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     showRowsByKeyValue(itemsToShow);
 });
 
-moreInfoBtn.addEventListener('click', toggleShowMoreOrLessInfo);
+moreInfoBtn.addEventListener("click", toggleShowMoreOrLessInfo);
 
 /**
  * Show rows in the table based on the provided keys.
+ * The rows are shown if the key is in the itemsToShow array.
  * @param {Array} itemsToShow - The keys of the rows to show.
  */
 function showRowsByKeyValue(itemsToShow) {
-    rows.forEach(row => {
+    rows.forEach((row) => {
         let tdKey = row.getElementsByClassName("td-key");
         let tdValue = row.getElementsByClassName("td-value");
         if (tdKey.length > 0 && tdValue.length > 0) {
@@ -44,7 +59,7 @@ function showRowsByKeyValue(itemsToShow) {
  * Show all rows in the table.
  */
 function showAllRows() {
-    rows.forEach(row => {
+    rows.forEach((row) => {
         row.style.display = "flex";
     });
     stylizeRow();
@@ -66,10 +81,14 @@ function toggleShowMoreOrLessInfo() {
 
 /**
  * Apply styles to the rows in the table.
+ * The rows are styled based on their index.
+ * Even rows have a light background color and odd rows have a darker background color.
+ * If the row contains the key "run state", the value is checked.
+ * If the value is "online", the background color is green and if the value is "offline", the background color is red.
  */
 function stylizeRow() {
     i = 0;
-    rows.forEach(row => {
+    rows.forEach((row) => {
         let tdKey = row.getElementsByClassName("td-key");
         let tdValue = row.getElementsByClassName("td-value");
         if (tdKey.length > 0 && tdValue.length > 0) {
@@ -85,7 +104,15 @@ function stylizeRow() {
                 }
                 i++;
             }
+            if (tdKey.innerText.trim().toLowerCase() == "run state") {
+                if (tdValue.innerText.trim().toLowerCase() == "online") {
+                    tdValue.style.backgroundColor = "#afffaa";
+                } else if (
+                    tdValue.innerText.trim().toLowerCase() == "offline"
+                ) {
+                    tdValue.style.backgroundColor = "#ff9a9a";
+                }
+            }
         }
     });
 }
-
