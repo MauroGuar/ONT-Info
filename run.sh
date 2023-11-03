@@ -32,14 +32,15 @@ ntKVZNSJoRKzMzY9ogvJuG8uO3cuy3cI1jeP6kWyF+Y1Bs64AgAA" | base64 -d | gunzip
 # cat your_ascii_art.txt | gzip | base64 # to generate the compressed code above
 echo "${NC}\n"
 
-current_dir="$(pwd)"
-repo_dir="/ONT-Info"
-if [ -z "${current_dir##*$repo_dir}" ] && [ -d .git ]; then
-  :
+filetoread="README.md"
+stringtofind="ONT-Info"
+
+if [ -f "$filetoread" ]; then
+  if ! grep -q "$stringtofind" "$filetoread"; then
+    echo "${YELLOW}-> The word '$stringtofind' was not found inside $filetoread. ${RED}Are you sure you are inside the repo?${NC}\n"
+  fi
 else
-  echo "${YELLOW}-> ${RED}YOU ARE NOT IN THE REPOSITORY${NC}\n"
-  echo "${YELLOW}-> ${CYAN}Use the command ${BG_GREEN}git clone https://github.com/MauroGuar/ONT-Info.git && cd ONT-Info${NC}"
-  exit 1
+  echo "${YELLOW}-> The file $filetoread does not exist. ${RED}Are you sure you are inside the repo?${NC}\n"
 fi
 
 docker_bin=$(which docker)
@@ -69,7 +70,7 @@ if [ ! -f "$env_file" ]; then
   stty -echo
   read olt_password
   stty echo
-  echo "\n${MAGENTA}> ${CYAN}Enter the flask session secret key:${NC} \c"
+  echo "\n${MAGENTA}> ${CYAN}Enter the flask session secret key (a password of your choosing):${NC} \c"
   stty -echo
   read flask_session_secret_key
   stty echo
@@ -81,5 +82,5 @@ if [ ! -f "$env_file" ]; then
 fi
 
 echo "${YELLOW}-> ${CYAN}Running Docker Compose in detached mode\n."
-docker compose up --build -d
+sudo docker compose up --build -d
 echo "\n${YELLOW}-> ${GREEN}Installation has been successfully completed.${NC}\n"
