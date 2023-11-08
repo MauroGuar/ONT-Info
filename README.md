@@ -101,7 +101,9 @@ Here are some important tips to keep in mind when performing the installation:
     ```bash
     sudo ip route add {YOUR OLT IP} via {YOUR GATEWAY IP} 
     ```
+## Customizing
 
+If you want to change data of the project for your specific case, read the [customizing guide](docs/customizing.md)
 
 ## 🖼️ Showcase
 
