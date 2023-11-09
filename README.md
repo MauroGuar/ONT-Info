@@ -119,3 +119,4 @@ If you want to change data of the project for your specific case, read the [cust
 
 If you want to collaborate with the project to add features or fix some bugs, read the [contributing guide](docs/contributing.md).  
 The repository owner is David Portales, so he is the one in charge of everything related to contributions.
+

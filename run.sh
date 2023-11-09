@@ -84,3 +84,4 @@ fi
 echo "${YELLOW}-> ${CYAN}Running Docker Compose in detached mode\n."
 sudo docker compose up --build -d
 echo "\n${YELLOW}-> ${GREEN}Installation has been successfully completed.${NC}\n"
+echo "\n${YELLOW}-> ${GREEN}You shall now see the web through http://127.0.0.1:80 (port 80 is HTTP's port) or your own private ip.${NC}\n"
